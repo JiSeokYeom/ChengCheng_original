@@ -10,7 +10,7 @@
         android:title="추가"/>
     <item
         android:id="@+id/account_box"
-        android:icon="@drawable/ic_add_box"
+        android:icon="@drawable/ic_account_box"
         android:title="마이페이지"/>
 
 </menu>
