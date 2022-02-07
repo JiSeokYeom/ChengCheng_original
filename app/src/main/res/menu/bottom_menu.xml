@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/home"
+        android:id="@+id/home_box"
         android:icon="@drawable/ic_home"
         android:title="홈"/>
     <item
@@ -9,7 +9,11 @@
         android:icon="@drawable/ic_add_box"
         android:title="추가"/>
     <item
-        android:id="@+id/account_box"
+        android:id="@+id/people_box"
+        android:icon="@drawable/ic_people"
+        android:title="친구"/>
+    <item
+        android:id="@+id/my_page_box"
         android:icon="@drawable/ic_account_box"
         android:title="마이페이지"/>
 
