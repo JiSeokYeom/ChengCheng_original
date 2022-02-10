@@ -7,15 +7,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.chengchengoriginal.R
 import com.example.chengchengoriginal.databinding.ActivityMainBinding
-import com.example.chengchengoriginal.fragment.AddItemFragment
-import com.example.chengchengoriginal.fragment.FriendFragment
-import com.example.chengchengoriginal.fragment.MainFragment_Personal
-import com.example.chengchengoriginal.fragment.MypageFragment
+import com.example.chengchengoriginal.fragment.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     //private val fT : FragmentTransaction = supportFragmentManager.beginTransaction()
-    private val mainFragmentPersonal = MainFragment_Personal()
+    private val mainFragmentRoot = MainFragment_Root()
     private val addItemFragment = AddItemFragment()
     private val friendFragment = FriendFragment()
     private val myPageFragment = MypageFragment()
@@ -34,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavi.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.home_box -> {
-                    changeFragment(mainFragmentPersonal)
+                    changeFragment(mainFragmentRoot)
                  }
                  R.id.add_box -> {
                      changeFragment(addItemFragment)
