@@ -3,6 +3,7 @@ package com.example.chengchengoriginal.activity
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.chengchengoriginal.R
@@ -14,11 +15,11 @@ class MainActivity : AppCompatActivity() {
     //private val fT : FragmentTransaction = supportFragmentManager.beginTransaction()
     private val mainFragmentRoot = MainFragment_Root()
     private val addItemFragment = AddItemFragment()
-    private val friendFragment = FriendFragment()
     private val myPageFragment = MypageFragment()
     private val TAG = "MainActivity"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         Log.d(TAG,"실행")
@@ -35,9 +36,6 @@ class MainActivity : AppCompatActivity() {
                  }
                  R.id.add_box -> {
                      changeFragment(addItemFragment)
-                 }
-                 R.id.people_box -> {
-                     changeFragment(friendFragment)
                  }
                  R.id.my_page_box -> {
                      changeFragment(myPageFragment)

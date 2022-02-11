@@ -13,6 +13,7 @@ import com.example.chengchengoriginal.activity.MainActivity
 import com.example.chengchengoriginal.adapter.MainRvAdapter
 import com.example.chengchengoriginal.databinding.FragmentMainPersonalBinding
 import com.example.chengchengoriginal.model.MainRecyclerViewItem
+import com.example.chengchengoriginal.style.MyItemDecoration
 
 
 class MainFragment_Personal : Fragment() {
@@ -33,6 +34,7 @@ class MainFragment_Personal : Fragment() {
 
         adapterRV = MainRvAdapter()
 
+        binding.mainPersonalRv.setHasFixedSize(true)
         binding.mainPersonalRv.adapter = adapterRV
         datas.add(MainRecyclerViewItem(R.drawable.testimg,"테스트 1111111"))
         datas.add(MainRecyclerViewItem(R.drawable.testimg,"테스트 2222222"))
@@ -43,6 +45,7 @@ class MainFragment_Personal : Fragment() {
         datas.add(MainRecyclerViewItem(R.drawable.testimg,"테스트 7777777"))
         adapterRV.mData = datas
         binding.mainPersonalRv.layoutManager = GridLayoutManager(context,4,RecyclerView.VERTICAL,false)
+        binding.mainPersonalRv.addItemDecoration(MyItemDecoration())
         return binding.root
 
     }
