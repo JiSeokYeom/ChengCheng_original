@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#FFFFFF"
+    android:background="@color/backgroundMain"
     tools:context=".fragment.MainFragment_Personal">
 <LinearLayout
     android:layout_width="match_parent"
@@ -16,6 +16,7 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="100dp"
     android:layout_marginEnd="100dp"
+    android:background="@color/backgroundMain"
     app:tabTextColor="#388E3C"
     app:tabRippleColor="#A2C3A3"
     app:tabIndicatorColor="#388E3C"

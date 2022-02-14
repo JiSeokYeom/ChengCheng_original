@@ -2,4 +2,8 @@
     <string name="app_name">ChengCheng(original)</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="addItemText">하이라이트로 등록할 사진 (최대 3개) 선택해 주세요</string>
+    <string name="contentsInputHint">내용을 간략히 입력 하세요</string>
+    <string name="addItemHint">제목</string>
+    <string name="btnSaveText">저 장</string>
 </resources>

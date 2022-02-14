@@ -21,7 +21,7 @@
         />
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/rv_item_title"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="테스트 문자 입니다"

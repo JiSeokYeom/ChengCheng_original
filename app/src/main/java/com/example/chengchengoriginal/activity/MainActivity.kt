@@ -12,7 +12,6 @@ import com.example.chengchengoriginal.fragment.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    //private val fT : FragmentTransaction = supportFragmentManager.beginTransaction()
     private val mainFragmentRoot = MainFragment_Root()
     private val addItemFragment = AddItemFragment()
     private val myPageFragment = MypageFragment()
@@ -49,7 +48,6 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.fragment_container,fragment)
-          //  .addToBackStack(null)
             .commit()
     }
 }
