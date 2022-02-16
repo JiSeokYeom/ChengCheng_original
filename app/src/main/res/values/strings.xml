@@ -6,4 +6,5 @@
     <string name="contentsInputHint">내용을 간략히 입력 하세요</string>
     <string name="addItemHint">제목</string>
     <string name="btnSaveText">저 장</string>
+    <string name="btnBackText">뒤 로</string>
 </resources>

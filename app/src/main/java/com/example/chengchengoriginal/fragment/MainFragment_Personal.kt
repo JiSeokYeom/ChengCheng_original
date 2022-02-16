@@ -63,6 +63,7 @@ class MainFragment_Personal : Fragment() {
 
 
 
+
     override fun onDestroy() {
         mbinding = null
         super.onDestroy()
