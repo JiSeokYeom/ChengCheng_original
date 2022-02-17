@@ -59,8 +59,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-            val tempTime = System.currentTimeMillis()
-            val intervalTime = tempTime - backPressedTime
+        val tempTime = System.currentTimeMillis()
+        val intervalTime = tempTime - backPressedTime
+        binding.bottomNavi.menu.findItem(R.id.home_box).isChecked = true
+        changeFragment(mainFragmentRoot)
             if (0 <= intervalTime && FINISH_INTERVAL_TIME >= intervalTime) {
                 super.onBackPressed()
             } else {

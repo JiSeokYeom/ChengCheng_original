@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundMain"
     tools:context=".activity.AddItem">
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -45,5 +46,61 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="오늘의 대표 사진을 선택해주세요"
+        android:textColor="@color/main"
+        android:layout_marginTop="5dp"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/img_1" />
+
+    <ImageView
+        android:id="@+id/img_1"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="#E8E8E8"
+        android:src="@drawable/icon_image"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <EditText
+        android:id="@+id/contents_input"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:backgroundTint="@color/main"
+        android:textSize="20sp"
+        android:hint="오늘 하루 느낀점을 적어주세요(15자이내)"
+        android:importantForAutofill="no"
+        android:inputType="none"
+        android:maxLength="15"
+        android:textCursorDrawable="@drawable/cursor_drawable"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contents_input">
+
+        <RadioButton
+            android:id="@+id/radio_btn_Private"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="비공개" />
+
+        <RadioButton
+            android:id="@+id/radio_btn_friend_open"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="친구공개" />
+
+    </RadioGroup>
 
   </androidx.constraintlayout.widget.ConstraintLayout>

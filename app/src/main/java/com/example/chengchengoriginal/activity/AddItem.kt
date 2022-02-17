@@ -1,12 +1,15 @@
 package com.example.chengchengoriginal.activity
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
-import com.example.chengchengoriginal.R
+import android.provider.MediaStore
+import android.util.Log
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
+import androidx.appcompat.app.AppCompatActivity
 import com.example.chengchengoriginal.databinding.ActivityAddItemBinding
-import com.example.chengchengoriginal.databinding.ActivityMainBinding
-import java.util.zip.Inflater
+
 
 class AddItem : AppCompatActivity() {
     private lateinit var binding: ActivityAddItemBinding
@@ -15,11 +18,13 @@ class AddItem : AppCompatActivity() {
         binding = ActivityAddItemBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.img1.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        }
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
 
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-
-    }
 }
