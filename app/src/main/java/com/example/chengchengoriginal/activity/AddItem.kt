@@ -17,7 +17,7 @@ import com.example.chengchengoriginal.databinding.ActivityAddItemBinding
 class AddItem : AppCompatActivity() {
     private val ALBUM_CODE = 101
     private val TAG = "AddItem"
-    private lateinit var sData : Array<String>
+    private lateinit var countArray : Array<String>
     private lateinit var adapter: ArrayAdapter<String>
     private lateinit var binding: ActivityAddItemBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,16 +25,17 @@ class AddItem : AppCompatActivity() {
         binding = ActivityAddItemBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        sData = resources.getStringArray(R.array.SoJoCount)
-        binding.img1.setOnClickListener {
+        countArray = resources.getStringArray(R.array.bottleCount)
+       /* binding.img1.setOnClickListener {
             requirePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), ALBUM_CODE)
-        }
+        }*/
         binding.btnBack.setOnClickListener {
             finish()
         }
 
-        adapter = ArrayAdapter(this,R.layout.spinner_item,sData)
+        adapter = ArrayAdapter(this,R.layout.spinner_item,countArray)
         binding.sojoSpinner.adapter = adapter
+        binding.beerSpinner.adapter = adapter
     }
     private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK)
@@ -67,7 +68,7 @@ class AddItem : AppCompatActivity() {
     }
 
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+   /* override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
             if(resultCode == RESULT_OK)
             {
@@ -79,7 +80,7 @@ class AddItem : AppCompatActivity() {
             {
                 Toast.makeText(this, "사진 선택 취소", Toast.LENGTH_LONG).show()
             }
-        }
+        }*/
 
     }
 

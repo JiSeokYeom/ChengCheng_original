@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="SoJoCount">
-        <item>0잔</item>
-        <item>0.5잔</item>
-        <item>1잔</item>
-        <item>1.5잔</item>
-        <item>2잔</item>
-        <item>2.5잔</item>
-        <item>3잔</item>
-        <item>3.5잔</item>
-        <item>4잔</item>
-        <item>4.5잔</item>
-        <item>5잔이상!!</item>
+    <string-array name="bottleCount">
+        <item>0병</item>
+        <item>0.5병</item>
+        <item>1병</item>
+        <item>1.5병</item>
+        <item>2병</item>
+        <item>2.5병</item>
+        <item>3병</item>
+        <item>3.5병</item>
+        <item>4병</item>
+        <item>4.5병</item>
+        <item>5병이상!!</item>
     </string-array>
 </resources>
