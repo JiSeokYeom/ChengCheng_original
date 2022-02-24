@@ -1,10 +1,12 @@
 <resources>
     <string name="app_name">ChengCheng(original)</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="addItemText">하이라이트로 등록할 사진 (최대 3개) 선택해 주세요</string>
-    <string name="contentsInputHint">내용을 간략히 입력 하세요</string>
-    <string name="addItemHint">제목</string>
+    <string name="addItemEatQuestion">각 종류 별로 몇병을 마셨나요?</string>
+    <string name="addItemText">오늘의 대표 술 사진을 선택해 주세요</string>
+    <string name="contentsInputHint">간단하게 내용을 적어주세요\n(40자이내)</string>
+    <string name="addItemCheckBox">기억이 안나요..</string>
+    <string name="addItemBeer">맥주</string>
+    <string name="addItemSoJu">소주</string>
     <string name="btnSaveText">저 장</string>
     <string name="btnBackText">뒤 로</string>
 </resources>

@@ -24,7 +24,6 @@
                 android:singleLine="true"
                 android:backgroundTint="@color/main"
                 android:textCursorDrawable="@drawable/cursor_drawable"
-                android:hint="@string/addItemHint"
                 android:inputType="text"
                  />
             <Button

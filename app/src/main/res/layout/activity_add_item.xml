@@ -14,6 +14,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <Button
             android:id="@+id/btn_back"
             style="?android:borderlessButtonStyle"
@@ -23,8 +24,8 @@
             android:textColor="@color/main"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+      />
+
         <TextView
             android:id="@+id/add_item_title"
             android:layout_width="250dp"
@@ -37,28 +38,15 @@
          <Button
             android:id="@+id/btn_save"
             style="?android:borderlessButtonStyle"
-            android:layout_width="70dp"
+            android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="@string/btnSaveText"
             android:textColor="@color/main"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+      />
     </LinearLayout>
 
-<!--    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="오늘의 대표 술 사진을 선택해 주세요"
-        android:textColor="@color/main"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />-->
-
-<!--
     <ImageView
         android:id="@+id/img_1"
         android:layout_width="150dp"
@@ -66,19 +54,87 @@
         android:background="#E8E8E8"
         android:scaleType="centerInside"
         android:src="@drawable/icon_image"
-        tools:layout_editor_absoluteY="60dp" />
--->
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/add_item_img_text"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
+    <EditText
+        android:id="@+id/contents_input"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:backgroundTint="@color/main"
+        android:hint="@string/contentsInputHint"
+        android:importantForAutofill="no"
+        android:inputType="none"
+        android:maxLength="40"
+        android:textCursorDrawable="@drawable/cursor_drawable"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/add_item_img_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/img_1"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
     <TextView
-        android:id="@+id/eat_question"
+        android:id="@+id/add_item_img_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="각 종류 별로 몇병을 마셨나요?"
+        android:layout_marginStart="5dp"
+        android:text="@string/addItemText"
         android:textColor="@color/main"
         android:textSize="15sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_1" />
 
+    <TextView
+        android:id="@+id/add_item_warning"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="※ 가로 사진은 작게 나올 수 있습니다.(세로 사진 권장)"
+        android:textColor="#FF3B3B"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_item_img_text" />
+    <View
+        android:id="@+id/solid_line"
+        android:layout_width="match_parent"
+        android:layout_height="1.0dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/main"
+        app:layout_constraintTop_toBottomOf="@+id/add_item_warning"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/solid_line">
+
+        <TextView
+            android:id="@+id/eat_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="50dp"
+            android:text="@string/addItemEatQuestion"
+            android:textColor="@color/main"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="@string/addItemCheckBox"
+            android:textColor="@color/main"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/add_item_linear1"
         android:layout_width="match_parent"
@@ -86,27 +142,25 @@
         android:orientation="horizontal"
         android:layout_marginTop="5dp"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@+id/eat_question">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
         <TextView
-            android:id="@+id/textview_soju"
+            android:id="@+id/textview_soJu"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_marginStart="5dp"
-            android:text="소주"
+            android:text="@string/addItemSoJu"
             android:textColor="@color/main"
             android:textSize="25sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/eat_question" />
+         />
 
         <Spinner
             android:id="@+id/sojo_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            app:layout_constraintStart_toEndOf="@+id/textview_sojo"
-            app:layout_constraintTop_toBottomOf="@+id/eat_question" />
+     />
     </LinearLayout>
 
     <LinearLayout
@@ -123,7 +177,7 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_marginStart="5dp"
-            android:text="맥주"
+            android:text="@string/addItemBeer"
             android:textColor="@color/main"
             android:textSize="25sp"
             android:textStyle="bold" />
@@ -135,48 +189,53 @@
             android:layout_marginStart="5dp" />
     </LinearLayout>
 
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/add_item_linear3"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:text="기억이 안나요.."
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toStartOf="@+id/checkBox"
+        app:layout_constraintTop_toBottomOf="@+id/add_item_linear2">
+
+        <TextView
+            android:id="@+id/textview_etc"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="5dp"
+            android:text="기타 주류"
+            android:textColor="@color/main"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/etc_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/add_item_date_picker_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="술 마신 날짜를 선택해 주세요"
         android:textColor="@color/main"
         android:textSize="15sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_item_linear2" />
+        app:layout_constraintTop_toBottomOf="@+id/add_item_linear3" />
 
-    <View
-        android:id="@+id/solid_line"
-        android:layout_width="match_parent"
-        android:layout_height="1.0dp"
-        android:layout_marginTop="5dp"
-        android:background="@color/main"
-        app:layout_constraintBottom_toTopOf="@+id/contents_input"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
-    <EditText
-        android:id="@+id/contents_input"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:backgroundTint="@color/main"
-        android:layout_marginTop="5dp"
-        android:hint="간단하게 내용을 적어주세요(40자이내)"
-        android:importantForAutofill="no"
-        android:inputType="none"
-        android:maxLength="40"
-        android:textCursorDrawable="@drawable/cursor_drawable"
-        android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
-<!--    <RadioGroup
+    <RadioGroup
         android:id="@+id/radio_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contents_input">
+        app:layout_constraintStart_toStartOf="parent">
 
         <RadioButton
             android:id="@+id/radio_btn_Private"
@@ -192,6 +251,6 @@
             android:layout_marginEnd="10dp"
             android:text="친구공개" />
 
-    </RadioGroup>-->
+    </RadioGroup>
 
   </androidx.constraintlayout.widget.ConstraintLayout>

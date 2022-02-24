@@ -26,16 +26,21 @@ class AddItem : AppCompatActivity() {
         setContentView(binding.root)
 
         countArray = resources.getStringArray(R.array.bottleCount)
-       /* binding.img1.setOnClickListener {
+        binding.img1.setOnClickListener {
             requirePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), ALBUM_CODE)
-        }*/
+        }
         binding.btnBack.setOnClickListener {
             finish()
         }
 
         adapter = ArrayAdapter(this,R.layout.spinner_item,countArray)
-        binding.sojoSpinner.adapter = adapter
-        binding.beerSpinner.adapter = adapter
+        binding.apply {
+            sojoSpinner.adapter = adapter
+            beerSpinner.adapter = adapter
+            etcSpinner.adapter = adapter
+        }
+
+
     }
     private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK)
@@ -68,7 +73,7 @@ class AddItem : AppCompatActivity() {
     }
 
 
-   /* override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
             if(resultCode == RESULT_OK)
             {
@@ -80,7 +85,7 @@ class AddItem : AppCompatActivity() {
             {
                 Toast.makeText(this, "사진 선택 취소", Toast.LENGTH_LONG).show()
             }
-        }*/
+        }
 
     }
 
