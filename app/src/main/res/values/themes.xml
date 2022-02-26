@@ -13,4 +13,12 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="SpinnerDatePicker" parent="android:Widget.Material.Light.DatePicker">
+        <item name="android:datePickerMode">calendar</item>
+        <item name="android:textSize">20sp</item>
+        <item name="colorAccent">#74A188</item>
+        <item name="android:textColor">#171717</item>
+        <item name="android:textColorPrimary">#171717</item>
+    </style>
+
 </resources>

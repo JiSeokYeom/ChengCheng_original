@@ -1,12 +1,16 @@
 <resources>
-    <string name="app_name">ChengCheng(original)</string>
+    <string name="app_name">하루한술</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="addItemEatQuestion">각 종류 별로 몇병을 마셨나요?</string>
     <string name="addItemText">오늘의 대표 술 사진을 선택해 주세요</string>
-    <string name="contentsInputHint">간단하게 내용을 적어주세요\n(40자이내)</string>
+    <string name="contentsInputHint">     (40자이내)</string>
     <string name="addItemCheckBox">기억이 안나요..</string>
     <string name="addItemBeer">맥주</string>
     <string name="addItemSoJu">소주</string>
-    <string name="btnSaveText">저 장</string>
+    <string name="addItemLetterInputCountText">%d글자</string>
+    <string name="btnNextText">다 음</string>
     <string name="btnBackText">뒤 로</string>
+    <string name="datePikerResult">%d년 %d월 %d일</string>
+    <string name="addItemBackPressedMessage">작성중인 내용이 있습니다.\n\'뒤로\' 버튼을 한 번 더 누르면 종료됩니다.</string>
+    <string name="mainBackPressedMessage">\'뒤로\' 버튼을 한 번 더 누르면 종료됩니다.</string>
 </resources>

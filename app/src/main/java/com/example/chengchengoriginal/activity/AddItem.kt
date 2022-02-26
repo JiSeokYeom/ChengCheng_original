@@ -3,49 +3,92 @@ package com.example.chengchengoriginal.activity
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.nfc.Tag
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.KeyEvent
+import android.view.KeyEvent.KEYCODE_ENTER
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.ViewModelProvider
+import com.example.chengchengoriginal.DoubleClickBackPressed
 import com.example.chengchengoriginal.R
 import com.example.chengchengoriginal.databinding.ActivityAddItemBinding
+import com.example.chengchengoriginal.dialog.DatePikerDialog
+import com.example.chengchengoriginal.viewmodel.AddItemViewModel
+import com.example.chengchengoriginal.viewmodel.DatePikerViewModel
 
 
 class AddItem : AppCompatActivity() {
+    private val viewModel: AddItemViewModel by lazy {
+        ViewModelProvider(this).get(AddItemViewModel::class.java)
+    }
     private val ALBUM_CODE = 101
     private val TAG = "AddItem"
     private lateinit var countArray : Array<String>
     private lateinit var adapter: ArrayAdapter<String>
     private lateinit var binding: ActivityAddItemBinding
+    private lateinit var doubleClickBackPressed : DoubleClickBackPressed
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddItemBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        countArray = resources.getStringArray(R.array.bottleCount)
-        binding.img1.setOnClickListener {
-            requirePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), ALBUM_CODE)
-        }
-        binding.btnBack.setOnClickListener {
-            finish()
-        }
+        binding.addItemViewModel = viewModel
+        binding.lifecycleOwner = this
 
-        adapter = ArrayAdapter(this,R.layout.spinner_item,countArray)
+        val dialog = DatePikerDialog()
+        doubleClickBackPressed = DoubleClickBackPressed(this)
+
+        countArray = resources.getStringArray(R.array.bottleCount)
+        adapter = ArrayAdapter(this, R.layout.spinner_item, countArray)
+
         binding.apply {
+            img1.setOnClickListener {
+                requirePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), ALBUM_CODE)
+            }
+
+            btnBack.setOnClickListener {
+                contentsInputTextCheck()
+            }
+
+            btnNext.setOnClickListener {
+                dialog.show(supportFragmentManager, "DatePikerDialog")
+            }
+
+            // editText 엔터 입력 방지
+            contentsInput.setOnKeyListener { v, keyCode, event ->
+                return@setOnKeyListener event.action == KeyEvent.ACTION_DOWN && keyCode == KEYCODE_ENTER
+            }
+
+            // editText 글자수 세기
+            contentsInput.addTextChangedListener {
+                viewModel.letterInputCount(it!!.length)
+            }
+
+
             sojoSpinner.adapter = adapter
             beerSpinner.adapter = adapter
             etcSpinner.adapter = adapter
-        }
-
+    }
 
     }
     private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = MediaStore.Images.Media.CONTENT_TYPE
         startActivityForResult(intent, ALBUM_CODE)
+    }
+    private fun contentsInputTextCheck(){
+        if(binding.contentsInput.text.isNotBlank()){
+            doubleClickBackPressed.backPressed(resources.getString(R.string.addItemBackPressedMessage))
+        }
+        else{
+            finish()
+        }
     }
 
     private fun requirePermissions(permissions : Array<String>, requestCode: Int) {
@@ -87,5 +130,8 @@ class AddItem : AppCompatActivity() {
             }
         }
 
+    override fun onBackPressed() {
+        contentsInputTextCheck()
+        }
     }
 

@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="AddItemViewModel"
+            type="com.example.chengchengoriginal.viewmodel.AddItemViewModel" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -25,7 +29,6 @@
             android:textSize="16sp"
             android:textStyle="bold"
       />
-
         <TextView
             android:id="@+id/add_item_title"
             android:layout_width="250dp"
@@ -36,11 +39,11 @@
             android:textStyle="bold"
             android:gravity="center"/>
          <Button
-            android:id="@+id/btn_save"
+            android:id="@+id/btn_next"
             style="?android:borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="@string/btnSaveText"
+            android:text="@string/btnNextText"
             android:textColor="@color/main"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -51,7 +54,7 @@
         android:id="@+id/img_1"
         android:layout_width="150dp"
         android:layout_height="300dp"
-        android:background="#E8E8E8"
+        android:background="@color/backgroundMain"
         android:scaleType="centerInside"
         android:src="@drawable/icon_image"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,15 +67,28 @@
         android:layout_height="0dp"
         android:backgroundTint="@color/main"
         android:hint="@string/contentsInputHint"
-        android:importantForAutofill="no"
-        android:inputType="none"
+        android:scrollHorizontally="false"
         android:maxLength="40"
         android:textCursorDrawable="@drawable/cursor_drawable"
         android:textSize="20sp"
+        android:autofillHints="no"
+        android:inputType="none"
         app:layout_constraintBottom_toTopOf="@+id/add_item_img_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/img_1"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@{@string/addItemLetterInputCountText(AddItemViewModel.numCount)}"
+        android:textSize="13sp"
+        android:textColor="@color/main"
+        android:layout_marginBottom="15dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/contents_input"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <TextView
         android:id="@+id/add_item_img_text"
         android:layout_width="match_parent"
@@ -84,25 +100,13 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_1" />
-
-    <TextView
-        android:id="@+id/add_item_warning"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:text="※ 가로 사진은 작게 나올 수 있습니다.(세로 사진 권장)"
-        android:textColor="#FF3B3B"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_item_img_text" />
     <View
         android:id="@+id/solid_line"
         android:layout_width="match_parent"
         android:layout_height="1.0dp"
         android:layout_marginTop="5dp"
         android:background="@color/main"
-        app:layout_constraintTop_toBottomOf="@+id/add_item_warning"
+        app:layout_constraintTop_toBottomOf="@+id/add_item_img_text"
         tools:layout_editor_absoluteX="0dp" />
 
     <LinearLayout
@@ -195,7 +199,6 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toStartOf="@+id/checkBox"
         app:layout_constraintTop_toBottomOf="@+id/add_item_linear2">
 
         <TextView
@@ -216,16 +219,6 @@
 
     </LinearLayout>
 
-
-    <TextView
-        android:id="@+id/add_item_date_picker_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="술 마신 날짜를 선택해 주세요"
-        android:textColor="@color/main"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/add_item_linear3" />
 
     <RadioGroup
         android:id="@+id/radio_group"
@@ -254,3 +247,4 @@
     </RadioGroup>
 
   </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
