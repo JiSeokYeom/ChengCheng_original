@@ -3,7 +3,7 @@
     <data>
         <variable
             name="AddItemViewModel"
-            type="com.example.chengchengoriginal.viewmodel.AddItemViewModel" />
+            type="com.one_day.one_drink_a_day.viewmodel.AddItemViewModel" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"

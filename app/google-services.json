@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "625031552307",
+    "project_id": "one-drink-a-day",
+    "storage_bucket": "one-drink-a-day.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:625031552307:android:031994c45e5125002c3246",
+        "android_client_info": {
+          "package_name": "com.one_day.one_drink_a_day"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "625031552307-nl2qk0p8qjaipkq1l2lk0bjdk8vhmnen.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.one_day.one_drink_a_day",
+            "certificate_hash": "476bb0119ac16a2a41c921dc44edf030ca8669c1"
+          }
+        },
+        {
+          "client_id": "625031552307-1vqrrfoie06vatjcq220ihjnjjr1i6fi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBb-ZYuFqam2uJIhb29CJ_JnkUIlJehTak"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "625031552307-1vqrrfoie06vatjcq220ihjnjjr1i6fi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
