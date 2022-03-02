@@ -128,23 +128,6 @@ class AddItem : AppCompatActivity() {
             }
         }
 
-    override fun onPause() {
-        super.onPause()
-        Log.d(TAG,"포즈")
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        Log.d(TAG,"리스타트")
-    }
-    override fun onResume() {
-        super.onResume()
-        Log.d(TAG,"리즘")
-    }
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d(TAG,"디스트로이")
-    }
 
     override fun onBackPressed() {
         contentsInputTextCheck()

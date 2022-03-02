@@ -3,13 +3,13 @@ package com.one_day.one_drink_a_day.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import com.google.firebase.auth.FirebaseAuth
-import com.one_day.one_drink_a_day.R
+import android.os.Handler
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.one_day.one_drink_a_day.databinding.ActivitySplashBinding
 
 class Splash : AppCompatActivity() {
-    lateinit var firebaseAuth : FirebaseAuth
+    //lateinit var firebaseAuth: FirebaseAuth
     lateinit var binding: ActivitySplashBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,17 +18,29 @@ class Splash : AppCompatActivity() {
 
         val loginActivity = Intent(this, Login::class.java)
         val mainActivity = Intent(this, MainActivity::class.java)
+        var splashFlag = false
 
-        firebaseAuth = FirebaseAuth.getInstance()
-        if(firebaseAuth.currentUser?.uid != null){
-            Log.d("aaa", firebaseAuth.currentUser?.uid!!)
-        }
 
+    if (Firebase.auth.currentUser?.uid != null)
+    {
         binding.splashLayout.setOnClickListener {
-            finish()
-            startActivity(mainActivity)
+            splashFlag = true
+            accountAvailable(mainActivity, splashFlag)
         }
+    } else
+    {
+        accountAvailable(loginActivity, splashFlag)
+    }
 
+}
 
+    private fun accountAvailable(intent: Intent, splashFlag: Boolean) {
+        val duration: Long = if(splashFlag) 300 else 3000
+        Handler().postDelayed({
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
+         //   overridePendingTransition(anim.fade_in, anim.fade_out)
+            finish()
+        }, duration)
     }
 }
