@@ -23,11 +23,9 @@ class DatePikerDialog : DialogFragment() {
     private lateinit var binding: DatepikerBinding
     private val TAG = "DatePikerDialog"
     private lateinit var addItem: AddItem
-    private var database = FirebaseDatabase.getInstance()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-
         addItem = context as AddItem
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -49,10 +47,10 @@ class DatePikerDialog : DialogFragment() {
             }
         })
 
+
         binding.saveBtn.setOnClickListener {
-            database.reference
+            addItem.datePickerResult(viewModel.viewModelYear.value!!,viewModel.viewModelMonth.value!!,viewModel.viewModelDay.value!!)
             dialog?.dismiss()
-            addItem.finish()
         }
 
 

@@ -31,19 +31,28 @@
       />
         <TextView
             android:id="@+id/add_item_title"
-            android:layout_width="250dp"
+            android:layout_width="165dp"
             android:layout_height="wrap_content"
             android:text="하루 한술"
             android:textColor="@color/main"
             android:textSize="20sp"
             android:textStyle="bold"
             android:gravity="center"/>
-         <Button
-            android:id="@+id/btn_next"
-            style="?android:borderlessButtonStyle"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/btn_date"
+            android:layout_width="85dp"
             android:layout_height="60dp"
-            android:text="@string/btnNextText"
+            style="?android:borderlessButtonStyle"
+            android:text="@string/btnDateText"
+            android:textColor="@color/main"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+         <Button
+            android:id="@+id/btn_save"
+            style="?android:borderlessButtonStyle"
+            android:layout_width="85dp"
+            android:layout_height="60dp"
+            android:text="@string/btnSaveText"
             android:textColor="@color/main"
             android:textSize="16sp"
             android:textStyle="bold"
