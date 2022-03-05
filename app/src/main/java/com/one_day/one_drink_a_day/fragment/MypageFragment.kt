@@ -25,6 +25,7 @@ class MypageFragment : Fragment() {
         val login = Intent(activity,Login::class.java)
         binding.googleLogout.setOnClickListener {
             signOut()
+            MainActivity.checkSW = true
             Toast.makeText(activity,"구글 로그아웃 성공", Toast.LENGTH_LONG).show()
             startActivity(login)
             activity?.finish()

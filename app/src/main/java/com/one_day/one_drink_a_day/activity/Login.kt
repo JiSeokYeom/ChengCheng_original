@@ -19,6 +19,7 @@ import com.google.firebase.ktx.Firebase
 import com.one_day.one_drink_a_day.FirebaseDB
 import com.one_day.one_drink_a_day.R
 import com.one_day.one_drink_a_day.databinding.ActivityLoginBinding
+import com.one_day.one_drink_a_day.dialog.AlcoholCheckDialog
 
 class Login : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding

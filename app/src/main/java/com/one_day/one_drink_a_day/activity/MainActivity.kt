@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.one_day.one_drink_a_day.DoubleClickBackPressed
 import com.one_day.one_drink_a_day.R
 import com.one_day.one_drink_a_day.databinding.ActivityMainBinding
+import com.one_day.one_drink_a_day.dialog.AlcoholCheckDialog
 import com.one_day.one_drink_a_day.fragment.MainFragment_Root
 import com.one_day.one_drink_a_day.fragment.MypageFragment
 
@@ -17,7 +18,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var doubleClickBackPressed : DoubleClickBackPressed
     private val mainFragmentRoot = MainFragment_Root()
     private val myPageFragment = MypageFragment()
+    private val checkDialog = AlcoholCheckDialog()
     private val TAG = "MainActivity"
+    companion object{
+        var checkSW = true
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -26,6 +31,10 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG,"실행")
         doubleClickBackPressed = DoubleClickBackPressed(this)
         initNavigationBar()
+        if (checkSW){
+            checkDialog.show(supportFragmentManager,"AlcoholCheckDialog")
+            checkSW = false
+        }
 
 
     }
