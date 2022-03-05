@@ -14,11 +14,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.one_day.one_drink_a_day.DoubleClickBackPressed
+import com.one_day.one_drink_a_day.FirebaseDB
 import com.one_day.one_drink_a_day.R
 import com.one_day.one_drink_a_day.databinding.ActivityAddItemBinding
 import com.one_day.one_drink_a_day.dialog.DatePikerDialog
@@ -32,8 +32,6 @@ class AddItem : AppCompatActivity() {
     private val ALBUM_CODE = 101
     private val TAG = "AddItem"
     private var date : String? = null
-    private val user = Firebase.auth.currentUser
-    private lateinit var database: DatabaseReference
     private lateinit var countArray : Array<String>
     private lateinit var adapter: ArrayAdapter<String>
     private lateinit var binding: ActivityAddItemBinding
@@ -46,17 +44,18 @@ class AddItem : AppCompatActivity() {
         binding.addItemViewModel = viewModel
         binding.lifecycleOwner = this
 
-        database = Firebase.database.reference
-
         val dialog = DatePikerDialog()
         doubleClickBackPressed = DoubleClickBackPressed(this)
 
         countArray = resources.getStringArray(R.array.bottleCount)
         adapter = ArrayAdapter(this, R.layout.spinner_item, countArray)
 
-       // val userId = user?.uid
-       // Log.d(TAG, userId.toString())
         binding.apply {
+
+            sojoSpinner.adapter = adapter
+            beerSpinner.adapter = adapter
+            etcSpinner.adapter = adapter
+
             img1.setOnClickListener {
                 requirePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), ALBUM_CODE)
             }
@@ -74,10 +73,10 @@ class AddItem : AppCompatActivity() {
                     Toast.makeText(this@AddItem, "날짜를 선택해 주세요", Toast.LENGTH_SHORT).show()
                 }
                 else{
-                /*    database.child("users")
-                        .child(user!!.uid)
+                    FirebaseDB.database.child("Users")
+                        .child(FirebaseDB.userID!!)
                         .child(date!!)
-                        .setValue("테스트")*/
+                        .setValue("테스트")
                     finish()
                 }
 
@@ -94,9 +93,6 @@ class AddItem : AppCompatActivity() {
             }
 
 
-            sojoSpinner.adapter = adapter
-            beerSpinner.adapter = adapter
-            etcSpinner.adapter = adapter
 
             // 기억이 안날때 스피너의 값을 0으로 초기화
             checkBox.setOnCheckedChangeListener { compoundButton, isChecked ->
@@ -172,7 +168,7 @@ class AddItem : AppCompatActivity() {
     
     fun datePickerResult(year : Int, month : Int, day : Int){
         Log.d(TAG,"$year 년 $month 월 $day 일")
-        date = "$year/$month/$day"
+        date = "${year}/${month}월/${day}일"
         Log.d(TAG,date!!)
         }
     }

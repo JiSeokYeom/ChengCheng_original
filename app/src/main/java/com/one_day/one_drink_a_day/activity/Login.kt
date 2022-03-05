@@ -16,6 +16,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.one_day.one_drink_a_day.FirebaseDB
 import com.one_day.one_drink_a_day.R
 import com.one_day.one_drink_a_day.databinding.ActivityLoginBinding
 
@@ -24,6 +25,7 @@ class Login : AppCompatActivity() {
     private val TAG = "Login"
     private lateinit var googleSignInClient: GoogleSignInClient
     private val RC_SIGN_IN = 99
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -74,6 +76,10 @@ class Login : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithCredential:success")
+                    FirebaseDB.database.child("Users")
+                        .child(FirebaseDB.userID!!)
+                        .child("Name")
+                        .setValue(FirebaseDB.userName)
                     finish()
                     startActivity(mainActivity)
                 } else {
