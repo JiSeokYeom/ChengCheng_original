@@ -7,6 +7,10 @@ class DoubleClickBackPressed(context: Activity) {
     private var backPressedTime: Long = 0
     private val activity = context
 
+   interface OnBackPressedListener {
+       fun onBackPressed()
+   }
+
     fun backPressed(textMsg : String) {
         if (System.currentTimeMillis() > backPressedTime + 2000) {
             backPressedTime = System.currentTimeMillis()

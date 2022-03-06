@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.DialogFragment
+import com.one_day.one_drink_a_day.DoubleClickBackPressed
+import com.one_day.one_drink_a_day.FirebaseDB
 import com.one_day.one_drink_a_day.R
 import com.one_day.one_drink_a_day.activity.MainActivity
 import com.one_day.one_drink_a_day.databinding.DialogAlcoholCheckBinding
@@ -38,10 +40,13 @@ class AlcoholCheckDialog : DialogFragment() {
             checkBeerSpinner.adapter = spinnerAdapter
             checkEtcSpinner.adapter = spinnerAdapter
 
+            isCancelable = false
+
             nextBtn.setOnClickListener {
                 checkSojo = checkSojoSpinner.selectedItem.toString()
                 checkBeer = checkBeerSpinner.selectedItem.toString()
                 checkEtc = checkEtcSpinner.selectedItem.toString()
+                FirebaseDB.alcoholCheckAdd(checkSojo,checkBeer,checkEtc)
                 Log.d(TAG,"소주 : $checkSojo 맥주 : $checkBeer 기타 : $checkEtc")
                 dialog?.dismiss()
             }
@@ -51,4 +56,6 @@ class AlcoholCheckDialog : DialogFragment() {
         }
         return view
     }
+
+
 }

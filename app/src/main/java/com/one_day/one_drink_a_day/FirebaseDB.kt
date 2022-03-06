@@ -13,8 +13,27 @@ object FirebaseDB {
     fun resultAdd(date : String,soJoCount : Int, beerCount : Int, etcCount : Int){
         database.child("Users")
             .child(userID!!)
+            .child("ItemList")
             .child(date)
             .child("Sojo")
             .setValue(soJoCount)
+    }
+
+    fun alcoholCheckAdd(soJo : String, beer : String, etc : String){
+        database.child("Users")
+            .child(userID!!)
+            .child("AlcoholCheck")
+            .child("SoJo")
+            .setValue(soJo)
+        database.child("Users")
+            .child(userID)
+            .child("AlcoholCheck")
+            .child("Beer")
+            .setValue(beer)
+        database.child("Users")
+            .child(userID)
+            .child("AlcoholCheck")
+            .child("Etc")
+            .setValue(etc)
     }
 }

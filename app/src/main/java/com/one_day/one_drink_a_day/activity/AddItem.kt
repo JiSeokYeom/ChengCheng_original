@@ -32,6 +32,9 @@ class AddItem : AppCompatActivity() {
     private val ALBUM_CODE = 101
     private val TAG = "AddItem"
     private var date : String? = null
+    private lateinit var soJoCount : String
+    private lateinit var checkBeer : String
+    private lateinit var checkEtc  : String
     private lateinit var countArray : Array<String>
     private lateinit var adapter: ArrayAdapter<String>
     private lateinit var binding: ActivityAddItemBinding
@@ -73,6 +76,7 @@ class AddItem : AppCompatActivity() {
                     Toast.makeText(this@AddItem, "날짜를 선택해 주세요", Toast.LENGTH_SHORT).show()
                 }
                 else{
+                   // FirebaseDB.resultAdd(date!!,)
                     FirebaseDB.database.child("Users")
                         .child(FirebaseDB.userID!!)
                         .child(date!!)
