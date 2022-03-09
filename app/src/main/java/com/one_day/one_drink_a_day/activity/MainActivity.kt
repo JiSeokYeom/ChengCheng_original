@@ -41,13 +41,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun initNavigationBar(){
         val addItem = Intent(this, AddItem::class.java)
+        val addItemTest = Intent(this,AddItemTest::class.java)
         binding.bottomNavi.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.home_box -> {
                     changeFragment(mainFragmentRoot)
                  }
                  R.id.add_box -> {
-                      startActivity(addItem)
+                      startActivity(addItemTest)
                     // binding.bottomNavi.visibility = View.GONE
                     // changeFragment(addItemFragment)
                  }
