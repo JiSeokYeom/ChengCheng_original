@@ -88,7 +88,7 @@
         android:gravity="center"/>
         <ImageView
             android:id="@+id/img_1"
-            android:layout_width="150dp"
+            android:layout_width="200dp"
             android:layout_height="300dp"
             android:background="@color/backgroundMain"
             android:scaleType="centerInside"
@@ -100,27 +100,98 @@
             android:layout_width="1.0dp"
             android:layout_height="match_parent"
             android:background="@color/main"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="386dp" />
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2병"
+            android:background="@drawable/textview_stroke"
+            android:textStyle="bold"
+            android:textColor="@color/main"
+            android:gravity="center"/>
         <ImageView
             android:id="@+id/img_2"
-            android:layout_width="150dp"
+            android:layout_width="200dp"
             android:layout_height="300dp"
             android:background="@color/backgroundMain"
             android:scaleType="centerInside"
             android:src="@drawable/icon_image"
             />
+        </LinearLayout>
     </LinearLayout>
 
+
     <View
-        android:id="@+id/solid_line"
+        android:id="@+id/solid_line4"
         android:layout_width="match_parent"
         android:layout_height="1.0dp"
         android:background="@color/main"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="386dp" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="3병"
+                android:background="@drawable/textview_stroke"
+                android:textStyle="bold"
+                android:textColor="@color/main"
+                android:gravity="center"/>
+            <ImageView
+                android:id="@+id/img_3"
+                android:layout_width="200dp"
+                android:layout_height="300dp"
+                android:background="@color/backgroundMain"
+                android:scaleType="centerInside"
+                android:src="@drawable/icon_image"
+                />
+        </LinearLayout>
+        <View
+            android:id="@+id/solid_line5"
+            android:layout_width="1.0dp"
+            android:layout_height="match_parent"
+            android:background="@color/main"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="4병"
+                android:background="@drawable/textview_stroke"
+                android:textStyle="bold"
+                android:textColor="@color/main"
+                android:gravity="center"/>
+            <ImageView
+                android:id="@+id/img_4"
+                android:layout_width="200dp"
+                android:layout_height="300dp"
+                android:background="@color/backgroundMain"
+                android:scaleType="centerInside"
+                android:src="@drawable/icon_image"
+                />
+        </LinearLayout>
+    </LinearLayout>
 
     <RadioGroup
         android:id="@+id/radio_group"

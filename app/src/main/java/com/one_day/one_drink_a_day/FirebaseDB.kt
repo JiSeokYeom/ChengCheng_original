@@ -1,6 +1,10 @@
 package com.one_day.one_drink_a_day
 
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
@@ -9,6 +13,7 @@ object FirebaseDB {
     val database = Firebase.database.reference
     val userID : String? = firebaseAuth.currentUser?.uid
     val userName : String? = firebaseAuth.currentUser?.displayName
+    private val myRef = database.ref
 
     fun resultAdd(date : String,soJoCount : Int, beerCount : Int, etcCount : Int){
         database.child("Users")
@@ -35,5 +40,18 @@ object FirebaseDB {
             .child("AlcoholCheck")
             .child("Etc")
             .setValue(etc)
+    }
+
+    fun dateRead() {
+
+        myRef.addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                // for (snapshot : DataSnapshot in snapshot.child("User").child())
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
     }
 }

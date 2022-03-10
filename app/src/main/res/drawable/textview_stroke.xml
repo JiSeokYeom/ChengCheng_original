@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:bottom="2dp"
-        android:right="-2dp"
-        >
-        <shape android:shape="rectangle" >
-
-            <!-- 테두리 두께 및 색상 설정 -->
-            <stroke
-                android:width="1dp"
-                android:color="@color/main" />
-            <solid android:color="@color/backgroundMain" />
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/main"/>
         </shape>
     </item>
-</selector>
+    <item
+        android:bottom="2dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/backgroundMain"/>
+        </shape>
+    </item>
+</layer-list>

@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG,"실행")
         doubleClickBackPressed = DoubleClickBackPressed(this)
         initNavigationBar()
+
         if (checkSW){
             checkDialog.show(supportFragmentManager,"AlcoholCheckDialog")
             checkSW = false
