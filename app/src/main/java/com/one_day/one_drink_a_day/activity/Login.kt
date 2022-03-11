@@ -27,6 +27,10 @@ class Login : AppCompatActivity() {
     private lateinit var googleSignInClient: GoogleSignInClient
     private val RC_SIGN_IN = 99
 
+    companion object{
+        var userCheck : Boolean = true
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -77,10 +81,7 @@ class Login : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithCredential:success")
-                    FirebaseDB.database.child("Users")
-                        .child(FirebaseDB.userID!!)
-                        .child("Name")
-                        .setValue(FirebaseDB.userName)
+                    FirebaseDB.userAdd()
                     finish()
                     startActivity(mainActivity)
                 } else {

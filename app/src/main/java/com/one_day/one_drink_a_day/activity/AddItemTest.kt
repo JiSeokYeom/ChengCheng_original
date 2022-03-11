@@ -8,6 +8,8 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.KeyEvent
 import android.view.KeyEvent.KEYCODE_ENTER
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -27,12 +29,42 @@ import com.one_day.one_drink_a_day.viewmodel.AddItemViewModel
 
 
 class AddItemTest : AppCompatActivity() {
+    private lateinit var adapter: ArrayAdapter<String>
+    private lateinit var countArray : Array<String>
     private lateinit var binding : ActivityAddItemTestBinding
+    private val TAG = "AddItemTest"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddItemTestBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        var str : String
+        var test : Float
+        countArray = resources.getStringArray(R.array.bottleCount)
+        adapter = ArrayAdapter(this, R.layout.spinner_item, countArray)
+
+        binding.apply {
+            sojoSpinner.adapter = adapter
+
+            sojoSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    Log.d(TAG,"${countArray[position]} 선택됨")
+                    str = countArray[position].replace("병","")
+                    Log.d(TAG,"$str 숫자 변환 값")
+                    test = str.toFloat() + str.toFloat()
+                    Log.d(TAG,"$test 숫자 변환 값2")
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    TODO("Not yet implemented")
+                }
+            }
+        }
     }
 /*    private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK)
