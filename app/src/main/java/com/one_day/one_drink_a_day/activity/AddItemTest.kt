@@ -44,9 +44,12 @@ class AddItemTest : AppCompatActivity() {
         adapter = ArrayAdapter(this, R.layout.spinner_item, countArray)
 
         binding.apply {
-            sojoSpinner.adapter = adapter
+            countSpinner1.adapter = adapter
+            countSpinner2.adapter = adapter
+            countSpinner3.adapter = adapter
+            countSpinner4.adapter = adapter
 
-            sojoSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            countSpinner1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
                 override fun onItemSelected(
                     parent: AdapterView<*>?,
                     view: View?,
