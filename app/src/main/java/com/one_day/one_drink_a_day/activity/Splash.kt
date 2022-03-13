@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.one_day.one_drink_a_day.FirebaseDB
 import com.one_day.one_drink_a_day.databinding.ActivitySplashBinding
 
 class Splash : AppCompatActivity() {
@@ -21,7 +22,7 @@ class Splash : AppCompatActivity() {
         var splashFlag = false
 
 
-    if (Firebase.auth.currentUser?.uid != null)
+    if (FirebaseDB.userID != null)
     {
         binding.splashLayout.setOnClickListener {
             splashFlag = true

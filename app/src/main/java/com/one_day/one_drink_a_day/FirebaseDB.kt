@@ -12,6 +12,7 @@ import com.google.firebase.ktx.Firebase
 object FirebaseDB {
     private val firebaseAuth = FirebaseAuth.getInstance()
     private val TAG = "FirebaseDB"
+    private var exists = false
     val database = Firebase.database.reference
     val userID : String? = firebaseAuth.currentUser?.uid
     val userName : String? = firebaseAuth.currentUser?.displayName
@@ -46,5 +47,19 @@ object FirebaseDB {
             .child("Etc")
             .setValue(etc)
     }
+    fun userDataExists():Boolean{
+        database.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(!snapshot.exists()){ exists = true }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e(TAG,"정보 가져오기 오류 $error")
+            }
+        })
+    return exists
+    }
+
+
 
 }
