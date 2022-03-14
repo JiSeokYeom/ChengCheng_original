@@ -14,11 +14,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import com.one_day.one_drink_a_day.DoubleClickBackPressed
-import com.one_day.one_drink_a_day.FirebaseDB
+import com.one_day.one_drink_a_day.firebase.FirebaseDB
 import com.one_day.one_drink_a_day.R
 import com.one_day.one_drink_a_day.databinding.ActivityAddItemBinding
 import com.one_day.one_drink_a_day.dialog.DatePikerDialog

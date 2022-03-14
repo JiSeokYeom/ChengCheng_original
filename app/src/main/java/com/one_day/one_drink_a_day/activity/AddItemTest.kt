@@ -1,45 +1,54 @@
 package com.one_day.one_drink_a_day.activity
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.KeyEvent
-import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import com.one_day.one_drink_a_day.DoubleClickBackPressed
-import com.one_day.one_drink_a_day.FirebaseDB
 import com.one_day.one_drink_a_day.R
-import com.one_day.one_drink_a_day.databinding.ActivityAddItemBinding
 import com.one_day.one_drink_a_day.databinding.ActivityAddItemTestBinding
 import com.one_day.one_drink_a_day.dialog.DatePikerDialog
-import com.one_day.one_drink_a_day.viewmodel.AddItemViewModel
+import com.one_day.one_drink_a_day.firebase.FirebaseDB
+import com.one_day.one_drink_a_day.viewmodel.AddItemTestViewModel
 
 
 class AddItemTest : AppCompatActivity() {
+    private val viewModel: AddItemTestViewModel by lazy {
+        ViewModelProvider(this).get(AddItemTestViewModel::class.java)
+    }
     private lateinit var adapter: ArrayAdapter<String>
     private lateinit var countArray : Array<String>
     private lateinit var binding : ActivityAddItemTestBinding
+    private lateinit var doubleClickBackPressed : DoubleClickBackPressed
+    private val ALBUM_CODE = 101
+    private var date : String? = null
     private val TAG = "AddItemTest"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddItemTestBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.addItemTestViewModel = viewModel
+        binding.lifecycleOwner = this
+
         var str : String
         var test : Float
+
+        val dialog = DatePikerDialog()
+        doubleClickBackPressed = DoubleClickBackPressed(this)
+
         countArray = resources.getStringArray(R.array.bottleCount)
         adapter = ArrayAdapter(this, R.layout.spinner_item, countArray)
 
@@ -48,6 +57,36 @@ class AddItemTest : AppCompatActivity() {
             countSpinner2.adapter = adapter
             countSpinner3.adapter = adapter
             countSpinner4.adapter = adapter
+
+            btnDateTest.setOnClickListener {
+                dialog.show(supportFragmentManager, "DatePikerDialog")
+            }
+
+            btnSave.setOnClickListener {
+                if (date.isNullOrBlank()) {
+                    Toast.makeText(this@AddItemTest, "날짜를 선택해 주세요", Toast.LENGTH_SHORT).show()
+                }
+                else{
+                    // FirebaseDB.resultAdd(date!!,)
+                    FirebaseDB.database.child("Users")
+                        .child(FirebaseDB.userID!!)
+                        .child(date!!)
+                        .setValue("테스트")
+                    finish()
+                }
+
+            img1.setOnClickListener {
+                requirePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), ALBUM_CODE)
+            }
+            img2.setOnClickListener {
+                requirePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), ALBUM_CODE)
+            }
+            img3.setOnClickListener {
+                requirePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), ALBUM_CODE)
+            }
+            img4.setOnClickListener {
+                requirePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), ALBUM_CODE)
+            }
 
             countSpinner1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
                 override fun onItemSelected(
@@ -67,15 +106,19 @@ class AddItemTest : AppCompatActivity() {
                     TODO("Not yet implemented")
                 }
             }
+            // 엔터키 입력 방지
+            titleInput.setOnKeyListener { v, keyCode, event ->
+                return@setOnKeyListener event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER
+            }
         }
     }
-/*    private fun openGallery() {
+    private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = MediaStore.Images.Media.CONTENT_TYPE
         startActivityForResult(intent, ALBUM_CODE)
     }
     private fun contentsInputTextCheck(){
-        if(binding.contentsInput.text.isNotBlank()){
+        if(binding.titleInput.text.isNotBlank()){
             doubleClickBackPressed.backPressed(resources.getString(R.string.addItemBackPressedMessage))
         }
         else{
@@ -126,11 +169,11 @@ class AddItemTest : AppCompatActivity() {
     override fun onBackPressed() {
         contentsInputTextCheck()
         }
-    
+
     fun datePickerResult(year : Int, month : Int, day : Int){
         Log.d(TAG,"$year 년 $month 월 $day 일")
         date = "${year}/${month}월/${day}일"
         Log.d(TAG,date!!)
-        }*/
+        }
     }
 

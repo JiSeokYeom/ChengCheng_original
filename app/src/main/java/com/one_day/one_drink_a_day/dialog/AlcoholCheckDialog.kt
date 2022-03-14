@@ -8,8 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.DialogFragment
-import com.one_day.one_drink_a_day.DoubleClickBackPressed
-import com.one_day.one_drink_a_day.FirebaseDB
+import com.one_day.one_drink_a_day.firebase.FirebaseDB
 import com.one_day.one_drink_a_day.R
 import com.one_day.one_drink_a_day.activity.MainActivity
 import com.one_day.one_drink_a_day.databinding.DialogAlcoholCheckBinding

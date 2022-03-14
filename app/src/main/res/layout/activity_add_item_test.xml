@@ -4,8 +4,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
-            name="AddItemViewModel"
-            type="com.one_day.one_drink_a_day.viewmodel.AddItemViewModel" />
+            name="AddItemTestViewModel"
+            type="com.one_day.one_drink_a_day.viewmodel.AddItemTestViewModel" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
@@ -40,7 +40,7 @@
             android:textStyle="bold"
             android:gravity="center"/>
         <Button
-            android:id="@+id/btn_date"
+            android:id="@+id/btn_date_test"
             android:layout_width="85dp"
             android:layout_height="60dp"
             style="?android:borderlessButtonStyle"
@@ -201,7 +201,7 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/contents_input2"
+        android:id="@+id/title_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autofillHints="no"

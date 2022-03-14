@@ -11,6 +11,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.database.FirebaseDatabase
 import com.one_day.one_drink_a_day.activity.AddItem
+import com.one_day.one_drink_a_day.activity.AddItemTest
 import com.one_day.one_drink_a_day.databinding.DatepikerBinding
 import com.one_day.one_drink_a_day.viewmodel.DatePikerViewModel
 import java.util.*
@@ -22,11 +23,13 @@ class DatePikerDialog : DialogFragment() {
     }
     private lateinit var binding: DatepikerBinding
     private val TAG = "DatePikerDialog"
-    private lateinit var addItem: AddItem
+  //  private lateinit var addItem: AddItem
+    private lateinit var addItemTest: AddItemTest
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        addItem = context as AddItem
+        //addItem = context as AddItem
+        addItemTest = context as AddItemTest
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DatepikerBinding.inflate(inflater,container,false)
@@ -49,7 +52,7 @@ class DatePikerDialog : DialogFragment() {
 
 
         binding.saveBtn.setOnClickListener {
-            addItem.datePickerResult(viewModel.viewModelYear.value!!,viewModel.viewModelMonth.value!!,viewModel.viewModelDay.value!!)
+            addItemTest.datePickerResult(viewModel.viewModelYear.value!!,viewModel.viewModelMonth.value!!,viewModel.viewModelDay.value!!)
             dialog?.dismiss()
         }
 
