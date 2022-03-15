@@ -9,8 +9,8 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
 object FirebaseDB {
-    private val firebaseAuth = FirebaseAuth.getInstance()
     private val TAG = "FirebaseDB"
+    val firebaseAuth = FirebaseAuth.getInstance()
     val database = Firebase.database.reference
     val userID : String? = firebaseAuth.currentUser?.uid
     val userName : String? = firebaseAuth.currentUser?.displayName

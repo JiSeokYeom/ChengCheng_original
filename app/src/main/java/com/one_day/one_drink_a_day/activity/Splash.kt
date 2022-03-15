@@ -4,12 +4,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import com.one_day.one_drink_a_day.firebase.FirebaseDB
 import com.one_day.one_drink_a_day.databinding.ActivitySplashBinding
 
 class Splash : AppCompatActivity() {
     //lateinit var firebaseAuth: FirebaseAuth
     lateinit var binding: ActivitySplashBinding
+    private val TAG = "Splash"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
@@ -19,6 +21,7 @@ class Splash : AppCompatActivity() {
         val mainActivity = Intent(this, MainActivity::class.java)
         var splashFlag = false
 
+        Log.d(TAG,"유저 존재 확인 ${FirebaseDB.userID}")
 
     if (FirebaseDB.userID != null)
     {
