@@ -31,6 +31,7 @@ class AddItemTest : AppCompatActivity() {
     private lateinit var countArray: Array<String>
     private lateinit var binding: ActivityAddItemTestBinding
     private lateinit var doubleClickBackPressed: DoubleClickBackPressed
+    private var imgNum : Int? = null
     private val REQUEST_CODE = 101
     private var date: String? = null
     private val TAG = "AddItemTest"
@@ -77,16 +78,20 @@ class AddItemTest : AppCompatActivity() {
 
                 img1.setOnClickListener {
                     requirePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_CODE)
+                    imgNum = 1
 
                 }
                 img2.setOnClickListener {
                     requirePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_CODE)
+                    imgNum = 2
                 }
                 img3.setOnClickListener {
                     requirePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_CODE)
+                    imgNum = 3
                 }
                 img4.setOnClickListener {
                     requirePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_CODE)
+                    imgNum = 4
                 }
 
                 countSpinner1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -169,7 +174,12 @@ class AddItemTest : AppCompatActivity() {
                 if(resultCode == RESULT_OK){
                     try {
                         val url = data?.data
-                        Glide.with(applicationContext).load(url).into(binding.img1)
+                        when(imgNum){
+                            1 -> Glide.with(applicationContext).load(url).into(binding.img1)
+                            2 -> Glide.with(applicationContext).load(url).into(binding.img2)
+                            3 -> Glide.with(applicationContext).load(url).into(binding.img3)
+                            4 -> Glide.with(applicationContext).load(url).into(binding.img4)
+                        }
                     } catch(e : Exception){
                         Log.e(TAG,"이미지 가져오기 오류")
                     }
