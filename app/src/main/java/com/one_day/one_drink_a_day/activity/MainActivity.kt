@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
             val editor : SharedPreferences.Editor = pref.edit()
             editor.putBoolean("checkFirst",true)
             editor.apply()
+            FirebaseDB.userAdd()
             checkDialog.show(supportFragmentManager, "AlcoholCheckDialog")
         }
     }

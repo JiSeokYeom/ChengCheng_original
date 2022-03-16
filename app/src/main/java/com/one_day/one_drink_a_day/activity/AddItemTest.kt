@@ -32,7 +32,8 @@ class AddItemTest : AppCompatActivity() {
     private lateinit var binding: ActivityAddItemTestBinding
     private lateinit var doubleClickBackPressed: DoubleClickBackPressed
     private var imgNum : Int? = null
-    private val REQUEST_CODE = 101
+    private val GALLERY_CODE = 101
+    private val CROP_CODE = 102
     private var date: String? = null
     private val TAG = "AddItemTest"
 
@@ -63,6 +64,10 @@ class AddItemTest : AppCompatActivity() {
                 dialog.show(supportFragmentManager, "DatePikerDialog")
             }
 
+            btnBack.setOnClickListener {
+                contentsInputTextCheck()
+            }
+
             btnSave.setOnClickListener {
                 if (date.isNullOrBlank()) {
                     Toast.makeText(this@AddItemTest, "날짜를 선택해 주세요", Toast.LENGTH_SHORT).show()
@@ -77,20 +82,20 @@ class AddItemTest : AppCompatActivity() {
             }
 
                 img1.setOnClickListener {
-                    requirePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_CODE)
+                    requirePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), GALLERY_CODE)
                     imgNum = 1
 
                 }
                 img2.setOnClickListener {
-                    requirePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_CODE)
+                    requirePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), GALLERY_CODE)
                     imgNum = 2
                 }
                 img3.setOnClickListener {
-                    requirePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_CODE)
+                    requirePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), GALLERY_CODE)
                     imgNum = 3
                 }
                 img4.setOnClickListener {
-                    requirePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), REQUEST_CODE)
+                    requirePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), GALLERY_CODE)
                     imgNum = 4
                 }
 
@@ -127,11 +132,11 @@ class AddItemTest : AppCompatActivity() {
 
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = MediaStore.Images.Media.CONTENT_TYPE
-            startActivityForResult(intent, REQUEST_CODE)
+            startActivityForResult(intent, GALLERY_CODE)
         }
 
         private fun contentsInputTextCheck() {
-            if (binding.titleInput.text.isNotBlank()) {
+            if (binding.titleInput.text.isNotBlank() || imgNum != null) {
                 doubleClickBackPressed.backPressed(resources.getString(R.string.addItemBackPressedMessage))
             } else {
                 finish()
@@ -170,30 +175,31 @@ class AddItemTest : AppCompatActivity() {
 
         override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
             super.onActivityResult(requestCode, resultCode, data)
-            if(requestCode == REQUEST_CODE){
-                if(resultCode == RESULT_OK){
-                    try {
+            when (requestCode) {
+                GALLERY_CODE -> {
+                if (resultCode == RESULT_OK) {
+                  /*  try {
                         val url = data?.data
-                        when(imgNum){
-                            1 -> Glide.with(applicationContext).load(url).into(binding.img1)
-                            2 -> Glide.with(applicationContext).load(url).into(binding.img2)
+                        when (imgNum) {
+                            1 -> {
+                                Glide.with(applicationContext).load(url).into(binding.img1)
+                                Log.d(TAG, "1번 사진 url $url")
+                            }
+                            2 -> {
+                                Glide.with(applicationContext).load(url).into(binding.img2)
+                                Log.d(TAG, "2번 사진 url $url")
+                            }
                             3 -> Glide.with(applicationContext).load(url).into(binding.img3)
                             4 -> Glide.with(applicationContext).load(url).into(binding.img4)
                         }
-                    } catch(e : Exception){
-                        Log.e(TAG,"이미지 가져오기 오류")
-                    }
+                    } catch (e: Exception) {
+                        Log.e(TAG, "이미지 가져오기 오류")
+                    }*/
                 }
             }
-           /* if (resultCode == RESULT_OK) {
-                data?.data.let { uri ->
-                    binding.img1.setImageURI(uri)
-                }
-            } else if (resultCode == RESULT_CANCELED) {
-                Toast.makeText(this, "사진 선택 취소", Toast.LENGTH_LONG).show()
-            }*/
-        }
+            }
 
+        }
 
         override fun onBackPressed() {
             contentsInputTextCheck()

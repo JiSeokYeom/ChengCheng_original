@@ -27,7 +27,7 @@ object FirebaseDB {
             .child(userID!!)
             .child("Name")
             .setValue(userName)
-        database.child("Users")
+/*        database.child("Users")
             .child(userID)
             .child("AlcoholCheck")
             .child("SoJo")
@@ -41,7 +41,7 @@ object FirebaseDB {
             .child(userID)
             .child("AlcoholCheck")
             .child("Etc")
-            .setValue("0")
+            .setValue("0")*/
     }
     fun alcoholCheckAdd(soJo : String, beer : String, etc : String){
         database.child("Users")

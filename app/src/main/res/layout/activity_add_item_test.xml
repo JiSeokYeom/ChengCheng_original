@@ -79,8 +79,10 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_item_img_text">
@@ -88,7 +90,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="25dp"
+            android:layout_weight="4.5"
             android:orientation="vertical">
 
             <Spinner
@@ -99,10 +101,12 @@
 
             <ImageView
                 android:id="@+id/img_1"
-                android:layout_width="150dp"
+                android:layout_width="200dp"
                 android:layout_height="250dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:layout_gravity="center"
                 android:background="@color/backgroundMain"
-                android:scaleType="centerInside"
                 android:src="@drawable/icon_image" />
         </LinearLayout>
 
@@ -110,12 +114,13 @@
             android:id="@+id/solid_line2"
             android:layout_width="1.0dp"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:background="@color/main" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
+            android:layout_weight="4.5"
             android:orientation="vertical">
 
 
@@ -127,7 +132,7 @@
 
             <ImageView
                 android:id="@+id/img_2"
-                android:layout_width="150dp"
+                android:layout_width="200dp"
                 android:layout_height="250dp"
                 android:background="@color/backgroundMain"
                 android:scaleType="centerInside"
