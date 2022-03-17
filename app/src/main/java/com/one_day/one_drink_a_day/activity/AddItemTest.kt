@@ -21,6 +21,8 @@ import com.one_day.one_drink_a_day.databinding.ActivityAddItemTestBinding
 import com.one_day.one_drink_a_day.dialog.DatePikerDialog
 import com.one_day.one_drink_a_day.firebase.FirebaseDB
 import com.one_day.one_drink_a_day.viewmodel.AddItemTestViewModel
+import java.net.URI
+import java.net.URL
 
 
 class AddItemTest : AppCompatActivity() {
@@ -34,6 +36,7 @@ class AddItemTest : AppCompatActivity() {
     private var imgNum : Int? = null
     private val GALLERY_CODE = 101
     private val CROP_CODE = 102
+    private val TAKE_PICTURE = 103
     private var date: String? = null
     private val TAG = "AddItemTest"
 
@@ -178,25 +181,43 @@ class AddItemTest : AppCompatActivity() {
             when (requestCode) {
                 GALLERY_CODE -> {
                 if (resultCode == RESULT_OK) {
-                  /*  try {
-                        val url = data?.data
-                        when (imgNum) {
-                            1 -> {
-                                Glide.with(applicationContext).load(url).into(binding.img1)
-                                Log.d(TAG, "1번 사진 url $url")
-                            }
-                            2 -> {
-                                Glide.with(applicationContext).load(url).into(binding.img2)
-                                Log.d(TAG, "2번 사진 url $url")
-                            }
-                            3 -> Glide.with(applicationContext).load(url).into(binding.img3)
-                            4 -> Glide.with(applicationContext).load(url).into(binding.img4)
-                        }
-                    } catch (e: Exception) {
-                        Log.e(TAG, "이미지 가져오기 오류")
-                    }*/
+                    startActivityForResult(intent, CROP_CODE)
                 }
             }
+                CROP_CODE -> {
+                    // 이미지를 가져온 이후의 리사이즈할 이미지 크기를 결정합니다.
+                    // 이후에 이미지 크롭 어플리케이션을 호출하게 됩니다
+                    val pictureUri = data?.data
+                    val intent = Intent("com.android.camera.action.CROP")
+                    intent.setDataAndType(pictureUri, "image/*")
+                    intent.putExtra("outputX", 200) //크롭한 이미지 x축 크기
+                    intent.putExtra("outputY", 200) //크롭한 이미지 y축 크기
+                    intent.putExtra("aspectX", 1) //크롭 박스의 x축 비율
+                    intent.putExtra("aspectY", 1) //크롭 박스의 y축 비율
+                    intent.putExtra("scale", true)
+                    intent.putExtra("return-data", true)
+                    startActivityForResult(intent, TAKE_PICTURE)
+                }
+
+                TAKE_PICTURE ->{
+                    val pictureUri = data?.data
+                    try {
+                         when (imgNum) {
+                             1 -> {
+                                 Glide.with(applicationContext).load(pictureUri).into(binding.img1)
+                                 Log.d(TAG, "1번 사진 url $pictureUri")
+                             }
+                             2 -> {
+                                 Glide.with(applicationContext).load(pictureUri).into(binding.img2)
+                                 Log.d(TAG, "2번 사진 url $pictureUri")
+                             }
+                             3 -> Glide.with(applicationContext).load(pictureUri).into(binding.img3)
+                             4 -> Glide.with(applicationContext).load(pictureUri).into(binding.img4)
+                         }
+                     } catch (e: Exception) {
+                         Log.e(TAG, "이미지 가져오기 오류")
+                     }
+                }
             }
 
         }
