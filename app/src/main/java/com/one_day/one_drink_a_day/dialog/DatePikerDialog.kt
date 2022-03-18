@@ -9,8 +9,6 @@ import android.view.ViewGroup
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
-import com.google.firebase.database.FirebaseDatabase
-import com.one_day.one_drink_a_day.activity.AddItem
 import com.one_day.one_drink_a_day.activity.AddItemTest
 import com.one_day.one_drink_a_day.databinding.DatepikerBinding
 import com.one_day.one_drink_a_day.viewmodel.DatePikerViewModel

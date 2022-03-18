@@ -18,6 +18,7 @@
         <entry key="..\:/ChengChengoriginal/app/src/main/res/drawable/textview_stroke.xml" value="0.1" />
         <entry key="..\:/ChengChengoriginal/app/src/main/res/layout/activity_add_item.xml" value="0.33" />
         <entry key="..\:/ChengChengoriginal/app/src/main/res/layout/activity_add_item_test.xml" value="0.25" />
+        <entry key="..\:/ChengChengoriginal/app/src/main/res/layout/activity_add_item_test2.xml" value="0.25181701581872595" />
         <entry key="..\:/ChengChengoriginal/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/ChengChengoriginal/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/ChengChengoriginal/app/src/main/res/layout/activity_main2.xml" value="0.1" />
@@ -25,7 +26,11 @@
         <entry key="..\:/ChengChengoriginal/app/src/main/res/layout/check_spinner_item.xml" value="0.21501390176088972" />
         <entry key="..\:/ChengChengoriginal/app/src/main/res/layout/datepiker.xml" value="0.25" />
         <entry key="..\:/ChengChengoriginal/app/src/main/res/layout/dialog_alcohol_check.xml" value="0.25" />
-        <entry key="..\:/ChengChengoriginal/app/src/main/res/layout/fragment_additem.xml" value="0.22021660649819494" />
+        <entry key="..\:/ChengChengoriginal/app/src/main/res/layout/fragment_additem.xml" value="0.25" />
+        <entry key="..\:/ChengChengoriginal/app/src/main/res/layout/fragment_additem1.xml" value="0.2394185549380077" />
+        <entry key="..\:/ChengChengoriginal/app/src/main/res/layout/fragment_additem2.xml" value="0.21889696451474988" />
+        <entry key="..\:/ChengChengoriginal/app/src/main/res/layout/fragment_additem3.xml" value="0.21889696451474988" />
+        <entry key="..\:/ChengChengoriginal/app/src/main/res/layout/fragment_additem4.xml" value="0.21889696451474988" />
         <entry key="..\:/ChengChengoriginal/app/src/main/res/layout/fragment_friend.xml" value="0.25" />
         <entry key="..\:/ChengChengoriginal/app/src/main/res/layout/fragment_main__friend.xml" value="0.3489583333333333" />
         <entry key="..\:/ChengChengoriginal/app/src/main/res/layout/fragment_main_friend.xml" value="0.24947916666666667" />

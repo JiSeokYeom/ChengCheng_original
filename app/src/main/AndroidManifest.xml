@@ -32,8 +32,15 @@
             android:name=".activity.AddItemTest"
             android:exported="false" />
         <activity
+            android:name=".activity.AddItemTest2"
+            android:exported="false" />
+        <activity
             android:name=".activity.MainActivity"
             android:exported="true" />
+
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat"
+            android:label="크롭 액티비티"/>
     </application>
 
 </manifest>

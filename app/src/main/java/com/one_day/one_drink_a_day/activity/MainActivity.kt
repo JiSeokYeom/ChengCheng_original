@@ -8,25 +8,20 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
 import com.one_day.one_drink_a_day.DoubleClickBackPressed
 import com.one_day.one_drink_a_day.firebase.FirebaseDB
 import com.one_day.one_drink_a_day.R
 import com.one_day.one_drink_a_day.databinding.ActivityMainBinding
 import com.one_day.one_drink_a_day.dialog.AlcoholCheckDialog
-import com.one_day.one_drink_a_day.firebase.FirebaseRead
-import com.one_day.one_drink_a_day.fragment.MainFragment_Root
+import com.one_day.one_drink_a_day.fragment.MainFragment
 import com.one_day.one_drink_a_day.fragment.MypageFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var doubleClickBackPressed : DoubleClickBackPressed
-    private val mainFragmentRoot = MainFragment_Root()
+    private val mainFragmentPersonal = MainFragment()
     private val myPageFragment = MypageFragment()
     private val checkDialog = AlcoholCheckDialog()
-    private val firebaseRead  = FirebaseRead()
     private val TAG = "MainActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,15 +47,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initNavigationBar(){
-        val addItem = Intent(this, AddItem::class.java)
         val addItemTest = Intent(this,AddItemTest::class.java)
+        val addItemTest2 = Intent(this,AddItemTest2::class.java)
         binding.bottomNavi.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.home_box -> {
-                    changeFragment(mainFragmentRoot)
+                    changeFragment(mainFragmentPersonal)
                  }
                  R.id.add_box -> {
-                      startActivity(addItemTest)
+                   //  startActivity(addItemTest)
+                     startActivity(addItemTest2)
                     // binding.bottomNavi.visibility = View.GONE
                     // changeFragment(addItemFragment)
                  }
@@ -81,14 +77,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         binding.bottomNavi.menu.findItem(R.id.home_box).isChecked = true
-        changeFragment(mainFragmentRoot)
+        changeFragment(mainFragmentPersonal)
         doubleClickBackPressed.backPressed(resources.getString(R.string.mainBackPressedMessage))
     }
 
     override fun onResume() {
         super.onResume()
         binding.bottomNavi.menu.findItem(R.id.home_box).isChecked = true
-        changeFragment(mainFragmentRoot)
+        changeFragment(mainFragmentPersonal)
     }
 }
 
