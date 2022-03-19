@@ -247,10 +247,10 @@ class AddItemTest : AppCompatActivity() {
             contentsInputTextCheck()
         }
 
-        fun datePickerResult(year: Int, month: Int, day: Int) {
+        /*fun datePickerResult(year: Int, month: Int, day: Int) {
             Log.d(TAG, "$year 년 $month 월 $day 일")
             date = "${year}/${month}월/${day}일"
             Log.d(TAG, date!!)
-        }
+        }*/
 }
 

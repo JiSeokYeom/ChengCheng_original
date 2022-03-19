@@ -306,7 +306,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$PROJECT_DIR$/../Android/icons/material/materialicons/people/baseline_people_24.xml" />
+                                      <entry key="url" value="file:/$PROJECT_DIR$/../Android/icons/material/materialicons/image_search/baseline_image_search_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -316,7 +316,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_people" />
+                            <entry key="color" value="36914b" />
+                            <entry key="outputName" value="ic_image_search" />
                             <entry key="sourceFile" value="D:\ChengChengoriginal" />
                           </map>
                         </option>

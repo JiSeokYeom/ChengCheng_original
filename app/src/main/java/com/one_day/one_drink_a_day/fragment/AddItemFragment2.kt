@@ -10,7 +10,7 @@ import com.one_day.one_drink_a_day.R
 class AddItemFragment2 : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_additem1, container, false)
+        return inflater.inflate(R.layout.fragment_additem2, container, false)
     }
 
 
