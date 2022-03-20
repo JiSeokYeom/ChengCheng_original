@@ -1,5 +1,7 @@
 package com.one_day.one_drink_a_day.adapter
 
+import android.app.Activity
+import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter

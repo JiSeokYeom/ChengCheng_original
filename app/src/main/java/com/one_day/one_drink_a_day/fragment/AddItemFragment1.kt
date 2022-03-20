@@ -26,15 +26,12 @@ import com.theartofdev.edmodo.cropper.CropImageView
 
 class AddItemFragment1 : Fragment() {
     private lateinit var spinnerStyle: SpinnerStyle
-    private lateinit var doubleClickBackPressed: DoubleClickBackPressed
     private lateinit var binding: FragmentAdditem1Binding
     private lateinit var permission: Permission
     private var imgNum: Int? = null
     private val GALLERY_CODE = 101
-    private var date: String? = null
     private var uri: Uri? = null   // 이미지 파일 경로
     private val TAG = "AddItemFragment1"
-    private var width : Double? = null
 
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -47,32 +44,9 @@ class AddItemFragment1 : Fragment() {
         spinnerStyle = SpinnerStyle(requireContext(),requireActivity())
 
         permission = Permission(requireActivity())
-        val dialog = DatePikerDialog()
-        doubleClickBackPressed = DoubleClickBackPressed(requireActivity())
 
         binding.apply {
             spinnerStyle.spinnerSet(countSpinner1)
-
-            btnDateTest.setOnClickListener {
-                dialog.show(childFragmentManager, "DatePikerDialog")
-            }
-
-            btnBack.setOnClickListener {
-                contentsInputTextCheck()
-            }
-
-            btnSave.setOnClickListener {
-                if (date.isNullOrBlank()) {
-                    Toast.makeText(requireActivity(), "날짜를 선택해 주세요", Toast.LENGTH_SHORT).show()
-                } else {
-                    // FirebaseDB.resultAdd(date!!,)
-                    FirebaseDB.database.child("Users")
-                        .child(FirebaseDB.userID!!)
-                        .child(date!!)
-                        .setValue("테스트")
-                    requireActivity().finish()
-                }
-            }
 
             img1.setOnClickListener {
                    if(permission.requirePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), GALLERY_CODE)){
@@ -118,15 +92,6 @@ class AddItemFragment1 : Fragment() {
             .setMinCropResultSize(1000,1300)
             .setMaxCropResultSize(1500,1900)
             .start(requireActivity(),this)
-        // 프레그먼트에서 사용할 땐 .start(activity as 프레그먼트의 부모 Activity, this@형재 프레그먼트 이름)
-    }
-
-    private fun contentsInputTextCheck() {
-        if (imgNum != null) {
-            doubleClickBackPressed.backPressed(resources.getString(R.string.addItemBackPressedMessage))
-        } else {
-            requireActivity().finish()
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -155,11 +120,5 @@ class AddItemFragment1 : Fragment() {
                 }
             }
         }
-    }
-
-    fun datePickerResult(year: Int, month: Int, day: Int) {
-        Log.d(TAG, "$year 년 $month 월 $day 일")
-        date = "${year}/${month}월/${day}일"
-        Log.d(TAG, date!!)
     }
 }

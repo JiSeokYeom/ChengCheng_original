@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.Point
 import android.os.Build
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import com.one_day.one_drink_a_day.R
@@ -13,7 +14,8 @@ import kotlin.coroutines.coroutineContext
 class SpinnerStyle(val context : Context,val activity: Activity) {
     private lateinit var spinnerAdapter: ArrayAdapter<String>
     private lateinit var countArray: Array<String>
-    private var width : Double? = null
+    private val TAG = "SpinnerStyle"
+    private var displayWidth : Double? = null
 
     @SuppressLint("UseCompatLoadingForDrawables")
     fun spinnerSet(spinner: Spinner){
@@ -25,7 +27,8 @@ class SpinnerStyle(val context : Context,val activity: Activity) {
             dropDownWidth = 600
             dropDownVerticalOffset = 30
             initWidth()
-            dropDownHorizontalOffset = width
+            Log.d(TAG, displayWidth.toString())
+            dropDownHorizontalOffset = displayWidth!!.toInt()
             setPopupBackgroundDrawable(context.getDrawable(R.drawable.style_spinner_popup))
         }
     }
@@ -36,12 +39,12 @@ class SpinnerStyle(val context : Context,val activity: Activity) {
             val display = activity.display
             val size = Point()
             display?.getRealSize(size)
-            width = size.x.toDouble() / 4.5
+            displayWidth = size.x.toDouble() / 4.5
         } else {
             val display = activity.windowManager.defaultDisplay
             val size = Point()
             display?.getRealSize(size)
-            width = size.x.toDouble() / 4.5
+            displayWidth = size.x.toDouble() / 4.5
         }
     }
 }

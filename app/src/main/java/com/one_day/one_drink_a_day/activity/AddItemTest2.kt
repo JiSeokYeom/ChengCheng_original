@@ -1,8 +1,10 @@
 package com.one_day.one_drink_a_day.activity
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.one_day.one_drink_a_day.DoubleClickBackPressed
 import com.one_day.one_drink_a_day.R
@@ -22,12 +24,38 @@ class AddItemTest2 : AppCompatActivity() {
         setContentView(binding.root)
         addItemPagerAdapter = AddItemPagerAdapter(this)
 
+
         doubleClickBackPressed = DoubleClickBackPressed(this)
         binding.apply {
+
             addFmViewpager.adapter = addItemPagerAdapter
             addFmViewpager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
             springDotsIndicator.setViewPager2(addFmViewpager)
+
+            addFmViewpager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    Log.d(TAG,"리스너 안 $position")
+                    if(position==0){
+                        btnBack.visibility = View.GONE
+                    }
+                    else{
+                        btnBack.visibility = View.VISIBLE
+                    }
+                }
+            })
+            btnNext.setOnClickListener {
+                val currentNext = addFmViewpager.currentItem
+                addFmViewpager.setCurrentItem(currentNext+1, true)
+            }
+
+            btnBack.setOnClickListener {
+                val currentBack = addFmViewpager.currentItem
+                addFmViewpager.setCurrentItem(currentBack-1,true)
+            }
+
+
         }
 
 

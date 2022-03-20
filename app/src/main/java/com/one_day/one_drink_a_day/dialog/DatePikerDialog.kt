@@ -13,6 +13,7 @@ import com.one_day.one_drink_a_day.activity.AddItemTest
 import com.one_day.one_drink_a_day.activity.AddItemTest2
 import com.one_day.one_drink_a_day.databinding.DatepikerBinding
 import com.one_day.one_drink_a_day.fragment.AddItemFragment1
+import com.one_day.one_drink_a_day.fragment.AddItemFragment4
 import com.one_day.one_drink_a_day.viewmodel.DatePikerViewModel
 import java.util.*
 
@@ -23,9 +24,7 @@ class DatePikerDialog : DialogFragment() {
     }
     private lateinit var binding: DatepikerBinding
     private val TAG = "DatePikerDialog"
-  //  private lateinit var addItem: AddItem
-    //private lateinit var addItemTest2: AddItemTest2
-    private lateinit var addItemFragment1: AddItemFragment1
+    private lateinit var addItemFragment4: AddItemFragment4
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -44,7 +43,7 @@ class DatePikerDialog : DialogFragment() {
 
         binding.datePikerViewModel = viewModel
         binding.lifecycleOwner = this
-        addItemFragment1 = AddItemFragment1()
+        addItemFragment4 = AddItemFragment4()
 
         binding.dateDlg.init(cYear,cMonth,cDay,object : DatePicker.OnDateChangedListener{
             override fun onDateChanged(view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
@@ -54,7 +53,7 @@ class DatePikerDialog : DialogFragment() {
 
 
         binding.saveBtn.setOnClickListener {
-            addItemFragment1.datePickerResult(viewModel.viewModelYear.value!!,viewModel.viewModelMonth.value!!,viewModel.viewModelDay.value!!)
+            addItemFragment4.datePickerResult(viewModel.viewModelYear.value!!,viewModel.viewModelMonth.value!!,viewModel.viewModelDay.value!!)
             dialog?.dismiss()
         }
 
