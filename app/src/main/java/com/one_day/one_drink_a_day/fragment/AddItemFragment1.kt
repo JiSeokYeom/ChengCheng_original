@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.one_day.one_drink_a_day.CropLibrary
 import com.one_day.one_drink_a_day.DoubleClickBackPressed
 import com.one_day.one_drink_a_day.Permission
 import com.one_day.one_drink_a_day.R
@@ -28,12 +29,12 @@ class AddItemFragment1 : Fragment() {
     private lateinit var spinnerStyle: SpinnerStyle
     private lateinit var binding: FragmentAdditem1Binding
     private lateinit var permission: Permission
+    private lateinit var cropLibrary: CropLibrary
     private var imgNum: Int? = null
     private val GALLERY_CODE = 101
     private var uri: Uri? = null   // 이미지 파일 경로
     private val TAG = "AddItemFragment1"
 
-    @SuppressLint("UseCompatLoadingForDrawables")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         binding = FragmentAdditem1Binding.inflate(inflater, container, false)
@@ -44,6 +45,7 @@ class AddItemFragment1 : Fragment() {
         spinnerStyle = SpinnerStyle(requireContext(),requireActivity())
 
         permission = Permission(requireActivity())
+        cropLibrary = CropLibrary(requireActivity(),this)
 
         binding.apply {
             spinnerStyle.spinnerSet(countSpinner1)
@@ -52,9 +54,6 @@ class AddItemFragment1 : Fragment() {
                    if(permission.requirePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), GALLERY_CODE)){
                     openGallery()
                     imgNum = 1
-                }
-                else{
-                    permission.requirePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), GALLERY_CODE)
                 }
             }
 
@@ -86,14 +85,6 @@ class AddItemFragment1 : Fragment() {
         startActivityForResult(intent, GALLERY_CODE)
     }
 
-    private fun cropImage(uri: Uri?) {
-        CropImage.activity(uri).setGuidelines(CropImageView.Guidelines.ON)  // 크롭 위한 가이드 열어서 크롭할 이미지 받아오기
-            //.setCropShape(CropImageView.CropShape.RECTANGLE)   // 사각형으로 자르기
-            .setMinCropResultSize(1000,1300)
-            .setMaxCropResultSize(1500,1900)
-            .start(requireActivity(),this)
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
@@ -102,7 +93,7 @@ class AddItemFragment1 : Fragment() {
                     uri = data?.data    // 선택한 이미지의 주소
                     // 사용자가 이미지를 선택했으면(null이 아니면)
                     if (uri != null) {
-                        cropImage(uri)
+                        cropLibrary.cropImage(uri)
                     }
                 }
             }
