@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
@@ -34,6 +35,10 @@ class AddItemFragment1 : Fragment() {
     private val GALLERY_CODE = 101
     private var uri: Uri? = null   // 이미지 파일 경로
     private val TAG = "AddItemFragment1"
+
+    companion object{
+        var imgBitmap1 : Bitmap? = null
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -107,9 +112,20 @@ class AddItemFragment1 : Fragment() {
                             // 프레그먼트명 activity?.contentResolver!!.openInputStream(result.uri!!)
                         )
                         binding.img1.setImageBitmap(bitmap)
+                        imgBitmap1 = bitmap
                     }
                 }
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG,"포즈상태")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG,"온리즘")
     }
 }

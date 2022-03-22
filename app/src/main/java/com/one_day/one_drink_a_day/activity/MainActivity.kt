@@ -1,6 +1,5 @@
 package com.one_day.one_drink_a_day.activity
 
-import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -35,7 +34,7 @@ class MainActivity : AppCompatActivity() {
 
         // SharedPreferences를 사용해 한번만 실행 하기기
         // 첫 로그인 성공 후 메인으로 넘어 올 시 주량체크 (한번만 실행 됨)
-        val pref : SharedPreferences = getSharedPreferences("checkFirst",Activity.MODE_PRIVATE)
+        val pref = getSharedPreferences("checkFirst",MODE_PRIVATE)
         val checkFirst : Boolean = pref.getBoolean("checkFirst",false)
         if(!checkFirst){
             val editor : SharedPreferences.Editor = pref.edit()
@@ -44,11 +43,11 @@ class MainActivity : AppCompatActivity() {
             FirebaseDB.userAdd()
             checkDialog.show(supportFragmentManager, "AlcoholCheckDialog")
         }
+
     }
 
     private fun initNavigationBar(){
-        val addItemTest = Intent(this,AddItemTest::class.java)
-        val addItemTest2 = Intent(this,AddItemTest2::class.java)
+        val addItem = Intent(this,AddItem::class.java)
         binding.bottomNavi.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.home_box -> {
@@ -56,9 +55,7 @@ class MainActivity : AppCompatActivity() {
                  }
                  R.id.add_box -> {
                    //  startActivity(addItemTest)
-                     startActivity(addItemTest2)
-                    // binding.bottomNavi.visibility = View.GONE
-                    // changeFragment(addItemFragment)
+                     startActivity(addItem)
                  }
                  R.id.my_page_box -> {
                      changeFragment(myPageFragment)
@@ -78,7 +75,7 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         binding.bottomNavi.menu.findItem(R.id.home_box).isChecked = true
         changeFragment(mainFragmentPersonal)
-        doubleClickBackPressed.backPressed(resources.getString(R.string.mainBackPressedMessage))
+        doubleClickBackPressed.backPressed(resources.getString(R.string.BackPressedMessage))
     }
 
     override fun onResume() {

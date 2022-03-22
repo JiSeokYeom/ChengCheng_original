@@ -9,10 +9,7 @@ import android.view.ViewGroup
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
-import com.one_day.one_drink_a_day.activity.AddItemTest
-import com.one_day.one_drink_a_day.activity.AddItemTest2
 import com.one_day.one_drink_a_day.databinding.DatepikerBinding
-import com.one_day.one_drink_a_day.fragment.AddItemFragment1
 import com.one_day.one_drink_a_day.fragment.AddItemFragment4
 import com.one_day.one_drink_a_day.viewmodel.DatePikerViewModel
 import java.util.*
