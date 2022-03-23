@@ -10,7 +10,7 @@ object SharedObject {
     private const val TAG = "SharedObject"
     var imgBitmapArray: ArrayList<Bitmap> = arrayListOf()
     var spinnerCountArray : Array<String> = arrayOf()
-    var saveSpinnerCount : ArrayList<String> = arrayListOf()
+    var saveSpinnerCount : ArrayList<String> = arrayListOf("0","0","0","0")
 
     fun spinnerSelect(spinner: Spinner, spinnerCount : Int) {
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
