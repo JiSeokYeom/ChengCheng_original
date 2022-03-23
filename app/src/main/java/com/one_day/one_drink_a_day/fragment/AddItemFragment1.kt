@@ -1,10 +1,8 @@
 package com.one_day.one_drink_a_day.fragment
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
@@ -12,19 +10,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.one_day.one_drink_a_day.CropLibrary
-import com.one_day.one_drink_a_day.DoubleClickBackPressed
 import com.one_day.one_drink_a_day.Permission
-import com.one_day.one_drink_a_day.R
 import com.one_day.one_drink_a_day.databinding.FragmentAdditem1Binding
-import com.one_day.one_drink_a_day.dialog.DatePikerDialog
-import com.one_day.one_drink_a_day.firebase.FirebaseDB
+import com.one_day.one_drink_a_day.model.SharedObject
 import com.one_day.one_drink_a_day.style.SpinnerStyle
 import com.theartofdev.edmodo.cropper.CropImage
-import com.theartofdev.edmodo.cropper.CropImageView
 
 class AddItemFragment1 : Fragment() {
     private lateinit var spinnerStyle: SpinnerStyle
@@ -36,16 +28,10 @@ class AddItemFragment1 : Fragment() {
     private var uri: Uri? = null   // 이미지 파일 경로
     private val TAG = "AddItemFragment1"
 
-    companion object{
-        var imgBitmap1 : Bitmap? = null
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         binding = FragmentAdditem1Binding.inflate(inflater, container, false)
-
-        var str: String
-        var test: Float
 
         spinnerStyle = SpinnerStyle(requireContext(),requireActivity())
 
@@ -62,6 +48,7 @@ class AddItemFragment1 : Fragment() {
                 }
             }
 
+            SharedObject.spinnerSelect(countSpinner1,0)
     /*        countSpinner1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
                     parent: AdapterView<*>?,
@@ -112,7 +99,7 @@ class AddItemFragment1 : Fragment() {
                             // 프레그먼트명 activity?.contentResolver!!.openInputStream(result.uri!!)
                         )
                         binding.img1.setImageBitmap(bitmap)
-                        imgBitmap1 = bitmap
+                        SharedObject.imgBitmapArray[0] = bitmap
                     }
                 }
             }

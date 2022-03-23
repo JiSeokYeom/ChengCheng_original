@@ -12,16 +12,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.one_day.one_drink_a_day.CropLibrary
 import com.one_day.one_drink_a_day.Permission
-import com.one_day.one_drink_a_day.R
 import com.one_day.one_drink_a_day.databinding.FragmentAdditem4Binding
 import com.one_day.one_drink_a_day.dialog.DatePikerDialog
 import com.one_day.one_drink_a_day.firebase.FirebaseDB
+import com.one_day.one_drink_a_day.model.SharedObject
 import com.one_day.one_drink_a_day.style.SpinnerStyle
+import com.one_day.one_drink_a_day.viewmodel.DatePikerViewModel
 import com.theartofdev.edmodo.cropper.CropImage
 
 class AddItemFragment4 : Fragment() {
+    private val datePikerViewModel: DatePikerViewModel by lazy {
+        ViewModelProvider(this).get(DatePikerViewModel::class.java)
+    }
     private lateinit var binding: FragmentAdditem4Binding
     private var date: String? = null
     private lateinit var spinnerStyle: SpinnerStyle
@@ -42,6 +47,8 @@ class AddItemFragment4 : Fragment() {
         permission = Permission(requireActivity())
         cropLibrary = CropLibrary(requireActivity(),this)
 
+
+
         binding.apply {
             spinnerStyle.spinnerSet(countSpinner4)
 
@@ -59,10 +66,14 @@ class AddItemFragment4 : Fragment() {
             btnSave.setOnClickListener {
                 if (date.isNullOrBlank()) {
                     Toast.makeText(requireActivity(), "날짜를 선택해 주세요", Toast.LENGTH_SHORT).show()
-                } else {
+                } /*else if(){
+
+                }*/
+                else {
                     // FirebaseDB.resultAdd(date!!,)
                     FirebaseDB.database.child("Users")
                         .child(FirebaseDB.userID!!)
+                        .child("ItemList")
                         .child(date!!)
                         .setValue("테스트")
                     requireActivity().finish()
@@ -106,6 +117,7 @@ class AddItemFragment4 : Fragment() {
                             // 프레그먼트명 activity?.contentResolver!!.openInputStream(result.uri!!)
                         )
                         binding.img4.setImageBitmap(bitmap)
+                        SharedObject.imgBitmapArray[3] = bitmap
                     }
                 }
             }

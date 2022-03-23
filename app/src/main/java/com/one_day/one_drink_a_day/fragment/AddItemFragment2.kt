@@ -12,8 +12,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.one_day.one_drink_a_day.CropLibrary
 import com.one_day.one_drink_a_day.Permission
-import com.one_day.one_drink_a_day.R
 import com.one_day.one_drink_a_day.databinding.FragmentAdditem2Binding
+import com.one_day.one_drink_a_day.model.SharedObject
 import com.one_day.one_drink_a_day.style.SpinnerStyle
 import com.theartofdev.edmodo.cropper.CropImage
 
@@ -36,6 +36,7 @@ class AddItemFragment2 : Fragment() {
         cropLibrary = CropLibrary(requireActivity(),this)
         binding.apply {
             spinnerStyle.spinnerSet(countSpinner2)
+            SharedObject.spinnerSelect(countSpinner2,1)
 
             img2.setOnClickListener {
                 if(permission.requirePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), GALLERY_CODE)){
@@ -43,6 +44,7 @@ class AddItemFragment2 : Fragment() {
                     imgNum = 1
                 }
             }
+
         }
 
         return binding.root
@@ -75,6 +77,7 @@ class AddItemFragment2 : Fragment() {
                             // 프레그먼트명 activity?.contentResolver!!.openInputStream(result.uri!!)
                         )
                         binding.img2.setImageBitmap(bitmap)
+                        SharedObject.imgBitmapArray[1] = bitmap
                     }
                 }
             }

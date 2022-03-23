@@ -9,20 +9,23 @@ import androidx.viewpager2.widget.ViewPager2
 import com.one_day.one_drink_a_day.DoubleClickBackPressed
 import com.one_day.one_drink_a_day.R
 import com.one_day.one_drink_a_day.adapter.AddItemPagerAdapter
-import com.one_day.one_drink_a_day.databinding.ActivityAddItemTest2Binding
+import com.one_day.one_drink_a_day.databinding.ActivityAddItemBinding
+import com.one_day.one_drink_a_day.model.SharedObject
 
 
 class AddItem : AppCompatActivity() {
-    private lateinit var binding: ActivityAddItemTest2Binding
+    private lateinit var binding: ActivityAddItemBinding
     private lateinit var addItemPagerAdapter: AddItemPagerAdapter
     private lateinit var doubleClickBackPressed : DoubleClickBackPressed
     private val TAG = "AddItemTest"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAddItemTest2Binding.inflate(layoutInflater)
+        binding = ActivityAddItemBinding.inflate(layoutInflater)
         setContentView(binding.root)
         addItemPagerAdapter = AddItemPagerAdapter(this)
+
+        SharedObject.spinnerCountArray = resources.getStringArray(R.array.bottleCount)
 
 
         doubleClickBackPressed = DoubleClickBackPressed(this)

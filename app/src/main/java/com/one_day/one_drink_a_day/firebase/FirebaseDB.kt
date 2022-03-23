@@ -1,12 +1,9 @@
 package com.one_day.one_drink_a_day.firebase
 
-import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.one_day.one_drink_a_day.model.SharedObject
 
 object FirebaseDB {
     private val TAG = "FirebaseDB"
@@ -14,13 +11,16 @@ object FirebaseDB {
     val database = Firebase.database.reference
     val userID : String? = firebaseAuth.currentUser?.uid
     val userName : String? = firebaseAuth.currentUser?.displayName
-    fun resultAdd(date : String,soJoCount : Int, beerCount : Int, etcCount : Int){
-        database.child("Users")
-            .child(userID!!)
-            .child("ItemList")
-            .child(date)
-            .child("Sojo")
-            .setValue(soJoCount)
+    fun resultAdd(date : String,spinnerCount : ArrayList<Int>){
+        for (i in 0..3) {
+            database.child("Users")
+                .child(userID!!)
+                .child("ItemList")
+                .child(date)
+                .child("${spinnerCount[i]}")
+                .setValue(SharedObject.imgBitmapArray[i])
+        }
+
     }
     fun userAdd(){
         database.child("Users")

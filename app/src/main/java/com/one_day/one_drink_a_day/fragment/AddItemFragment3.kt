@@ -12,9 +12,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.one_day.one_drink_a_day.CropLibrary
 import com.one_day.one_drink_a_day.Permission
-import com.one_day.one_drink_a_day.R
-import com.one_day.one_drink_a_day.databinding.FragmentAdditem2Binding
 import com.one_day.one_drink_a_day.databinding.FragmentAdditem3Binding
+import com.one_day.one_drink_a_day.model.SharedObject
 import com.one_day.one_drink_a_day.style.SpinnerStyle
 import com.theartofdev.edmodo.cropper.CropImage
 
@@ -76,6 +75,7 @@ class AddItemFragment3 : Fragment() {
                             // 프레그먼트명 activity?.contentResolver!!.openInputStream(result.uri!!)
                         )
                         binding.img3.setImageBitmap(bitmap)
+                        SharedObject.imgBitmapArray[2] = bitmap
                     }
                 }
             }
