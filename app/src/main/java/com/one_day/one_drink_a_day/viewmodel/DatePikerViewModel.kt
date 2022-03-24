@@ -8,7 +8,6 @@ import java.util.*
 class DatePikerViewModel :ViewModel() {
     private val calendar = Calendar.getInstance()
     private val TAG = "DatePikerViewModel"
-    private lateinit var date : String
     var viewModelYear : MutableLiveData<Int> = MutableLiveData()
     var viewModelMonth : MutableLiveData<Int> = MutableLiveData()
     var viewModelDay : MutableLiveData<Int> = MutableLiveData()

@@ -1,6 +1,5 @@
 package com.one_day.one_drink_a_day.activity
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,7 +9,7 @@ import com.one_day.one_drink_a_day.DoubleClickBackPressed
 import com.one_day.one_drink_a_day.R
 import com.one_day.one_drink_a_day.adapter.AddItemPagerAdapter
 import com.one_day.one_drink_a_day.databinding.ActivityAddItemBinding
-import com.one_day.one_drink_a_day.model.SharedObject
+import com.one_day.one_drink_a_day.SharedObject
 
 
 class AddItem : AppCompatActivity() {

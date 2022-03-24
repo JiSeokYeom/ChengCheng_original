@@ -48,14 +48,10 @@ class DatePikerDialog : DialogFragment() {
             }
         })
 
-
         binding.saveBtn.setOnClickListener {
             addItemFragment4.datePickerResult(viewModel.viewModelYear.value!!,viewModel.viewModelMonth.value!!,viewModel.viewModelDay.value!!)
             dialog?.dismiss()
         }
-
-
-
 
         return view
     }

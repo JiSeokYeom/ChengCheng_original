@@ -79,4 +79,7 @@ dependencies {
 
     // 사진 크롭 라이브러리
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
+
 }

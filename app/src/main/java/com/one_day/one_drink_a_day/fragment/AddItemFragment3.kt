@@ -10,10 +10,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.one_day.one_drink_a_day.CropLibrary
 import com.one_day.one_drink_a_day.Permission
 import com.one_day.one_drink_a_day.databinding.FragmentAdditem3Binding
-import com.one_day.one_drink_a_day.model.SharedObject
+import com.one_day.one_drink_a_day.SharedObject
 import com.one_day.one_drink_a_day.style.SpinnerStyle
 import com.theartofdev.edmodo.cropper.CropImage
 
@@ -36,6 +37,7 @@ class AddItemFragment3 : Fragment() {
         cropLibrary = CropLibrary(requireActivity(),this)
         binding.apply {
             spinnerStyle.spinnerSet(countSpinner3)
+            SharedObject.spinnerSelect(countSpinner3,2)
 
             img3.setOnClickListener {
                 if(permission.requirePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), GALLERY_CODE)){
@@ -69,13 +71,11 @@ class AddItemFragment3 : Fragment() {
                 val result = CropImage.getActivityResult(data)
                 if (resultCode == Activity.RESULT_OK) {
                     result.uri?.let {
-                        // 이미지 파일 읽어와서 설정하기
-                        val bitmap = BitmapFactory.decodeStream(
-                            requireActivity().contentResolver!!.openInputStream(result.uri!!)
-                            // 프레그먼트명 activity?.contentResolver!!.openInputStream(result.uri!!)
-                        )
-                        binding.img3.setImageBitmap(bitmap)
-                        SharedObject.imgBitmapArray[2] = bitmap
+                        // 이미지 파일 읽어와서 이미지뷰에 띄워주기
+                        SharedObject.imgStringArray[2] = it.toString()
+                        Glide.with(this)
+                            .load(it)
+                            .into(binding.img3)
                     }
                 }
             }
