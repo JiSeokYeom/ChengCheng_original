@@ -29,11 +29,9 @@
             android:name=".activity.AddItem"
             android:exported="false" />
         <activity
-            android:name=".activity.AddItemTest"
+            android:name=".activity.TitleInput"
             android:exported="false" />
-        <activity
-            android:name=".activity.AddItem"
-            android:exported="false" />
+
         <activity
             android:name=".activity.MainActivity"
             android:exported="true" />

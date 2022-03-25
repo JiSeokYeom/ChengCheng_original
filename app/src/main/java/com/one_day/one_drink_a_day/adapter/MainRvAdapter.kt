@@ -11,7 +11,7 @@ class MainRvAdapter : RecyclerView.Adapter<MainRvAdapter.ViewHolder>(){
 
     inner class ViewHolder(var binding: RvitemBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(item: MainRecyclerViewItem){
-            binding.titleImg.setImageResource(item.img)
+            binding.rvTitleImg.setImageResource(item.img)
             binding.rvItemTitle.text = item.title
         }
     }

@@ -7,7 +7,6 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
-import com.one_day.one_drink_a_day.DoubleClickBackPressed
 import com.one_day.one_drink_a_day.firebase.FirebaseDB
 import com.one_day.one_drink_a_day.R
 import com.one_day.one_drink_a_day.databinding.ActivityMainBinding
@@ -17,7 +16,6 @@ import com.one_day.one_drink_a_day.fragment.MypageFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var doubleClickBackPressed : DoubleClickBackPressed
     private val mainFragmentPersonal = MainFragment()
     private val myPageFragment = MypageFragment()
     private val checkDialog = AlcoholCheckDialog()
@@ -29,8 +27,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         Log.d(TAG,"실행")
-        doubleClickBackPressed = DoubleClickBackPressed(this)
         initNavigationBar()
+
 
         // SharedPreferences를 사용해 한번만 실행 하기기
         // 첫 로그인 성공 후 메인으로 넘어 올 시 주량체크 (한번만 실행 됨)
@@ -48,15 +46,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initNavigationBar(){
-        val addItem = Intent(this,AddItem::class.java)
+        // val addItem = Intent(this,AddItem::class.java)
+        val titleInput = Intent(this,TitleInput::class.java)
         binding.bottomNavi.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.home_box -> {
                     changeFragment(mainFragmentPersonal)
                  }
                  R.id.add_box -> {
-                   //  startActivity(addItemTest)
-                     startActivity(addItem)
+                     startActivity(titleInput)
+                    // startActivity(addItem)
                  }
                  R.id.my_page_box -> {
                      changeFragment(myPageFragment)
@@ -73,11 +72,6 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    override fun onBackPressed() {
-        binding.bottomNavi.menu.findItem(R.id.home_box).isChecked = true
-        changeFragment(mainFragmentPersonal)
-        doubleClickBackPressed.backPressed(resources.getString(R.string.BackPressedMessage))
-    }
 
     override fun onResume() {
         super.onResume()

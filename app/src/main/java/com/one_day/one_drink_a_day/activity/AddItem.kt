@@ -42,8 +42,12 @@ class AddItem : AppCompatActivity() {
                     if(position==0){
                         btnBack.visibility = View.GONE
                     }
+                    else if(position==3){
+                        btnNext.visibility = View.GONE
+                    }
                     else{
                         btnBack.visibility = View.VISIBLE
+                        btnNext.visibility = View.VISIBLE
                     }
                 }
             })

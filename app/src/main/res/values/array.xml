@@ -2,15 +2,10 @@
 <resources>
     <string-array name="bottleCount">
         <item>0병</item>
-        <item>0.5병</item>
         <item>1병</item>
-        <item>1.5병</item>
         <item>2병</item>
-        <item>2.5병</item>
         <item>3병</item>
-        <item>3.5병</item>
         <item>4병</item>
-        <item>4.5병</item>
         <item>5병이상</item>
     </string-array>
 </resources>

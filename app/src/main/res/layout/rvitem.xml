@@ -5,7 +5,7 @@
     >
 
     <ImageView
-        android:id="@+id/title_img"
+        android:id="@+id/rv_title_img"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:src="@drawable/testimg"

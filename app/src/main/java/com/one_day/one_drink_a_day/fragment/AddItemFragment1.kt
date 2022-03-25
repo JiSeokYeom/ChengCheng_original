@@ -87,7 +87,7 @@ class AddItemFragment1 : Fragment() {
                     uri = data?.data    // 선택한 이미지의 주소
                     // 사용자가 이미지를 선택했으면(null이 아니면)
                     if (uri != null) {
-                        cropLibrary.cropImage(uri)
+                        cropLibrary.activityCropImage(uri)
                     }
                 }
             }
