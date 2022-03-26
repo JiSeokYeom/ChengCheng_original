@@ -3,7 +3,6 @@ package com.one_day.one_drink_a_day.fragment
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -23,7 +22,6 @@ class AddItemFragment2 : Fragment() {
     private lateinit var spinnerStyle: SpinnerStyle
     private lateinit var permission: Permission
     private lateinit var cropLibrary: CropLibrary
-    private val GALLERY_CODE = 101
     private var imgNum: Int? = null
     private var uri: Uri? = null   // 이미지 파일 경로
     private val TAG = "AddItemFragment2"
@@ -40,7 +38,7 @@ class AddItemFragment2 : Fragment() {
             SharedObject.spinnerSelect(countSpinner2,1)
 
             img2.setOnClickListener {
-                if(permission.requirePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), GALLERY_CODE)){
+                if(permission.requirePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), SharedObject.GALLERY_CODE)){
                     openGallery()
                     imgNum = 1
                 }
@@ -54,17 +52,17 @@ class AddItemFragment2 : Fragment() {
     private fun openGallery() {
         val intent = Intent("android.intent.action.GET_CONTENT")
         intent.type = "image/*"     // 모든 이미지
-        startActivityForResult(intent, GALLERY_CODE)
+        startActivityForResult(intent, SharedObject.GALLERY_CODE)
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
-            GALLERY_CODE -> {
+            SharedObject.GALLERY_CODE -> {
                 if (resultCode == Activity.RESULT_OK) {
                     uri = data?.data    // 선택한 이미지의 주소
                     // 사용자가 이미지를 선택했으면(null이 아니면)
                     if (uri != null) {
-                        cropLibrary.cropImage(uri)
+                        cropLibrary.fragmentCropImage(uri)
                     }
                 }
             }

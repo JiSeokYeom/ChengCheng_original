@@ -5,18 +5,16 @@ import androidx.lifecycle.ViewModel
 import com.one_day.one_drink_a_day.model.MainRecyclerViewItem
 
 class MainViewModel : ViewModel(){
-    val dataLiveData = MutableLiveData<List<MainRecyclerViewItem>>()
+    var rvLiveData : MutableLiveData<ArrayList<MainRecyclerViewItem>> = MutableLiveData()
+   // val dataLiveData = MutableLiveData<List<MainRecyclerViewItem>>()
     private val datas = arrayListOf<MainRecyclerViewItem>()
 
-    init {
-        dataLiveData.value = datas
-    }
-    /*fun getListAll():{
+    fun getListAll(){
 
-    }*/
+    }
     fun dataAdd(mainRecyclerViewItem: MainRecyclerViewItem){
         datas.add(mainRecyclerViewItem)
-        dataLiveData.value = datas
+     //   dataLiveData.value = datas
     }
 
     fun dataDelete(mainRecyclerViewItem: MainRecyclerViewItem){

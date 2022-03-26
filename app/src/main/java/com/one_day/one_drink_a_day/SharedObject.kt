@@ -14,6 +14,9 @@ object SharedObject {
     var spinnerCountArray : Array<String> = arrayOf()
     var saveSpinnerCount : ArrayList<String> = arrayListOf("0","0","0","0")
     var date : String? = null
+    val GALLERY_CODE = 101
+    var titleImg : String? = null
+    var titleString : String? = null
 
     fun spinnerSelect(spinner: Spinner, spinnerCount : Int) {
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
