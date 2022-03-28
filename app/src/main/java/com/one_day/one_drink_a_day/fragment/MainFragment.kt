@@ -25,11 +25,11 @@ import com.one_day.one_drink_a_day.viewmodel.MainViewModel
 class MainFragment : Fragment() {
     var mainActivity : MainActivity? = null
     private lateinit var adapterRV: MainRvAdapter
-    private val datas = arrayListOf<MainRecyclerViewItem>()
+    private var datas = arrayListOf<MainRecyclerViewItem>()
     private val TAG = "MainFragment"
     private lateinit var mainViewModel : MainViewModel
     private var titleName : ArrayList<String> = arrayListOf()
-    private var titleImg : String? = null
+    private var titleImg : ArrayList<String> = arrayListOf()
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mainActivity = context as MainActivity
@@ -57,13 +57,20 @@ class MainFragment : Fragment() {
     private fun itemAdd(){
         val myRef = FirebaseDB.database.child("publicList").child("ItemList")
         var count  = 0
+        titleName = arrayListOf()
+        titleImg = arrayListOf()
+        datas = arrayListOf()
         myRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (dataSnapshot : DataSnapshot in snapshot.children){
                     Log.d(TAG,"for문 내부 ${dataSnapshot.child("TitleName").value}")
-                    titleName = dataSnapshot.child("TitleName").value as ArrayList<String>
-
+                    titleName.add(dataSnapshot.child("TitleName").value.toString())
+                    titleImg.add(dataSnapshot.child("TitleImg").value.toString())
+                    datas.add(MainRecyclerViewItem(dataSnapshot.child("TitleImg").value as String,(dataSnapshot.child("TitleName").value as String)))
+                    Log.d(TAG,"for문 name 내부 $titleName")
+                    Log.d(TAG,"for문 Img 내부 $titleImg")
                 }
+
             }
 
             override fun onCancelled(error: DatabaseError) {

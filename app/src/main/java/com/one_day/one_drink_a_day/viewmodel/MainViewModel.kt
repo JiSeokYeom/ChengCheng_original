@@ -9,6 +9,9 @@ class MainViewModel : ViewModel(){
    // val dataLiveData = MutableLiveData<List<MainRecyclerViewItem>>()
     private val datas = arrayListOf<MainRecyclerViewItem>()
 
+    init {
+        
+    }
     fun getListAll(){
 
     }

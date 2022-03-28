@@ -1,11 +1,17 @@
 package com.one_day.one_drink_a_day.firebase
 
-import android.util.Log
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.one_day.one_drink_a_day.SharedObject
+import java.io.ByteArrayInputStream
+import java.util.*
+
 
 object FirebaseDB {
     private val TAG = "FirebaseDB"
@@ -102,4 +108,6 @@ object FirebaseDB {
         key = instanceDatabase.getReference("publicList").child("ItemList").push().key.toString()
         return key
     }
+
+
 }

@@ -3,6 +3,7 @@ package com.one_day.one_drink_a_day.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.one_day.one_drink_a_day.model.MainRecyclerViewItem
 import com.one_day.one_drink_a_day.databinding.RvitemBinding
 
@@ -11,7 +12,7 @@ class MainRvAdapter : RecyclerView.Adapter<MainRvAdapter.ViewHolder>(){
 
     inner class ViewHolder(var binding: RvitemBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(item: MainRecyclerViewItem){
-            binding.rvTitleImg.setImageResource(item.img)
+            Glide.with(itemView).load(item.img).into(binding.rvTitleImg)
             binding.rvItemTitle.text = item.title
         }
     }
