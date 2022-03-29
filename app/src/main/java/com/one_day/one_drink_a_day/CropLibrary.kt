@@ -1,10 +1,14 @@
 package com.one_day.one_drink_a_day
 
 import android.app.Activity
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.fragment.app.Fragment
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
+import java.io.FileNotFoundException
+import java.io.InputStream
 import java.net.URL
 
 class CropLibrary(val activity: Activity) {
@@ -21,6 +25,17 @@ class CropLibrary(val activity: Activity) {
             .setMaxCropResultSize(1500,1900)
             .start(activity,fragment!!)
     }
+    fun setUriToBitmapImage(uri: Uri) : Bitmap? {
+        return try {
+            val inputStream : InputStream? = activity.contentResolver.openInputStream(uri)
+            val bitmap = BitmapFactory.decodeStream(inputStream)
+            bitmap
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+            null
+        }
+    }
+
     constructor( activity: Activity,fragment : Fragment) : this(activity) {
         this.fragment = fragment
     }

@@ -72,7 +72,7 @@ class AddItemFragment4 : Fragment() {
             btnSave.setOnClickListener {
                 SharedObject.apply {
                     for (i in 0..3) {
-                        if (imgStringArray[i] == "0") {
+                        if (imgBitmapArray.isNullOrEmpty()) {
                             Toast.makeText(
                                 requireActivity(),
                                 "이미지를 4개 다 적용 시켜주세요",
@@ -89,6 +89,7 @@ class AddItemFragment4 : Fragment() {
                         }
                         else {
                             FirebaseDB.resultAdd(date!!)
+                            imgBitmapArray = arrayListOf()
                             requireActivity().finish()
                             break
                         }
@@ -129,11 +130,8 @@ class AddItemFragment4 : Fragment() {
                 val result = CropImage.getActivityResult(data)
                 if (resultCode == Activity.RESULT_OK) {
                     result.uri?.let {
-                        // 이미지 파일 읽어와서 이미지뷰에 띄워주기
-                        SharedObject.imgStringArray[3] = it.toString()
-                        Glide.with(this)
-                            .load(it)
-                            .into(binding.img4)
+                        SharedObject.imgBitmapArray.add(cropLibrary.setUriToBitmapImage(result.uri)!!)
+                        binding.img4.setImageBitmap(SharedObject.imgBitmapArray[3])
                     }
                 }
             }

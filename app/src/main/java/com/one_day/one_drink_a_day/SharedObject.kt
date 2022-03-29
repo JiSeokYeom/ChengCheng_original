@@ -11,17 +11,19 @@ import android.widget.AdapterView
 import android.widget.Spinner
 import androidx.annotation.RequiresApi
 import java.io.ByteArrayInputStream
+import java.io.FileNotFoundException
+import java.io.InputStream
 import java.util.*
 import kotlin.collections.ArrayList
 
 object SharedObject {
     private const val TAG = "SharedObject"
-    var imgStringArray: ArrayList<String> = arrayListOf("0","0","0","0")
+    var imgBitmapArray: ArrayList<Bitmap> = arrayListOf()
     var spinnerCountArray : Array<String> = arrayOf()
     var saveSpinnerCount : ArrayList<String> = arrayListOf("0","0","0","0")
     var date : String? = null
     val GALLERY_CODE = 101
-    var titleImg : String? = null
+    var titleImg : Bitmap? = null
     var titleString : String? = null
 
     fun spinnerSelect(spinner: Spinner, spinnerCount : Int) {
@@ -36,16 +38,6 @@ object SharedObject {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
         }
-    }
-
-    //string 을  bitmap 형태로 변환하는 메서드
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun stringToBitmap(data: String?): Bitmap? {
-        var bitmap: Bitmap? = null
-        val byteArray: ByteArray = Base64.getDecoder().decode(data)
-        val stream = ByteArrayInputStream(byteArray)
-        bitmap = BitmapFactory.decodeStream(stream)
-        return bitmap
     }
 
 }

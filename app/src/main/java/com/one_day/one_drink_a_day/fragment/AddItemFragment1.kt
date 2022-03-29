@@ -4,12 +4,15 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.one_day.one_drink_a_day.CropLibrary
@@ -18,6 +21,10 @@ import com.one_day.one_drink_a_day.databinding.FragmentAdditem1Binding
 import com.one_day.one_drink_a_day.SharedObject
 import com.one_day.one_drink_a_day.style.SpinnerStyle
 import com.theartofdev.edmodo.cropper.CropImage
+import java.io.ByteArrayInputStream
+import java.io.FileNotFoundException
+import java.io.InputStream
+import java.util.*
 
 class AddItemFragment1 : Fragment() {
     private lateinit var spinnerStyle: SpinnerStyle
@@ -28,14 +35,17 @@ class AddItemFragment1 : Fragment() {
     private var uri: Uri? = null   // 이미지 파일 경로
     private val TAG = "AddItemFragment1"
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         binding = FragmentAdditem1Binding.inflate(inflater, container, false)
 
-        spinnerStyle = SpinnerStyle(requireContext(),requireActivity())
+        val addItemActivity : Activity = requireActivity()
 
-        permission = Permission(requireActivity())
-        cropLibrary = CropLibrary(requireActivity(),this)
+        spinnerStyle = SpinnerStyle(requireContext(),addItemActivity)
+
+        permission = Permission(addItemActivity)
+        cropLibrary = CropLibrary(addItemActivity,this)
 
         binding.apply {
             spinnerStyle.spinnerSet(countSpinner1)
@@ -92,16 +102,15 @@ class AddItemFragment1 : Fragment() {
                 val result = CropImage.getActivityResult(data)
                 if (resultCode == Activity.RESULT_OK) {
                     result.uri?.let {
-                        // 이미지 파일 읽어와서 이미지뷰에 띄워주기
-                        SharedObject.imgStringArray[0] = it.toString()
-                        Glide.with(this)
-                            .load(it)
-                            .into(binding.img1)
+                        SharedObject.imgBitmapArray.add(cropLibrary.setUriToBitmapImage(result.uri)!!)
+                        binding.img1.setImageBitmap(SharedObject.imgBitmapArray[0])
                     }
                 }
             }
         }
     }
+
+
 
     override fun onPause() {
         super.onPause()

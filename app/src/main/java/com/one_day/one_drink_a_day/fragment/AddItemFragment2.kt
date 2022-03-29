@@ -70,11 +70,8 @@ class AddItemFragment2 : Fragment() {
                 val result = CropImage.getActivityResult(data)
                 if (resultCode == Activity.RESULT_OK) {
                     result.uri?.let {
-                        // 이미지 파일 읽어와서 이미지뷰에 띄워주기
-                        SharedObject.imgStringArray[1] = it.toString()
-                        Glide.with(this)
-                            .load(it)
-                            .into(binding.img2)
+                        SharedObject.imgBitmapArray.add(cropLibrary.setUriToBitmapImage(result.uri)!!)
+                        binding.img2.setImageBitmap(SharedObject.imgBitmapArray[1])
                     }
                 }
             }

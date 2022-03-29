@@ -31,7 +31,7 @@ object FirebaseDB {
                 .child("${SharedObject.titleString}")
                 .child(SharedObject.saveSpinnerCount[i])
                 .child("Img")
-                .setValue(SharedObject.imgStringArray[i])
+            //    .setValue(SharedObject.imgStringArray[i])
         }
         // 타이틀 이미지와 타이틀 이름 저장
         database.child("Users")
@@ -99,7 +99,7 @@ object FirebaseDB {
                 .child(resultKey)
                 .child(SharedObject.saveSpinnerCount[i])
                 .child("Img")
-                .setValue(SharedObject.imgStringArray[i])
+           //     .setValue(SharedObject.imgStringArray[i])
         }
 
     }
