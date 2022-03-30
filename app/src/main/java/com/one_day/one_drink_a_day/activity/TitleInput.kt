@@ -5,9 +5,11 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.one_day.one_drink_a_day.*
 import com.one_day.one_drink_a_day.databinding.ActivityTitleInputBinding
@@ -63,6 +65,7 @@ class TitleInput : AppCompatActivity() {
         startActivityForResult(intent, SharedObject.GALLERY_CODE)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
@@ -79,9 +82,10 @@ class TitleInput : AppCompatActivity() {
                 val result = CropImage.getActivityResult(data)
                 if (resultCode == Activity.RESULT_OK) {
                     result.uri?.let {
-                        SharedObject.titleImg = cropLibrary.setUriToBitmapImage(result.uri)
+                        SharedObject.titleImg = cropLibrary.bitmapToString(cropLibrary.setUriToBitmapImage(result.uri)!!)
                         Log.d(TAG,"공유객체 비트맵 주소 ${SharedObject.titleImg}")
-                        binding.titleImg.setImageBitmap(SharedObject.titleImg)
+                        Log.d(TAG,"공유객체 비트맵 주소2 ${cropLibrary.stringToBitmap(SharedObject.titleImg!!)}")
+                        binding.titleImg.setImageBitmap(cropLibrary.setUriToBitmapImage(result.uri))
                     }
                 }
             }

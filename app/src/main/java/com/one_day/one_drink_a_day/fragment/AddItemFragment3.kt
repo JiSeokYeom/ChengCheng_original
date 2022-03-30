@@ -5,12 +5,14 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.annotation.RequiresApi
 import com.bumptech.glide.Glide
 import com.one_day.one_drink_a_day.CropLibrary
 import com.one_day.one_drink_a_day.Permission
@@ -56,6 +58,7 @@ class AddItemFragment3 : Fragment() {
         intent.type = "image/*"     // 모든 이미지
         startActivityForResult(intent, SharedObject.GALLERY_CODE)
     }
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
@@ -72,8 +75,8 @@ class AddItemFragment3 : Fragment() {
                 val result = CropImage.getActivityResult(data)
                 if (resultCode == Activity.RESULT_OK) {
                     result.uri?.let {
-                        SharedObject.imgBitmapArray.add(cropLibrary.setUriToBitmapImage(result.uri)!!)
-                        binding.img3.setImageBitmap(SharedObject.imgBitmapArray[2])
+                        SharedObject.imgBitmapArray.add(cropLibrary.bitmapToString(cropLibrary.setUriToBitmapImage(result.uri)!!)!!)
+                        binding.img3.setImageBitmap(cropLibrary.setUriToBitmapImage(result.uri))
                     }
                 }
             }

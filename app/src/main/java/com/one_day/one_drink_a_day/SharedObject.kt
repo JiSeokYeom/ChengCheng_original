@@ -18,12 +18,13 @@ import kotlin.collections.ArrayList
 
 object SharedObject {
     private const val TAG = "SharedObject"
-    var imgBitmapArray: ArrayList<Bitmap> = arrayListOf()
+    // var imgBitmapArray: ArrayList<Bitmap> = arrayListOf()
+    var imgBitmapArray: ArrayList<String> = arrayListOf()
     var spinnerCountArray : Array<String> = arrayOf()
     var saveSpinnerCount : ArrayList<String> = arrayListOf("0","0","0","0")
     var date : String? = null
     val GALLERY_CODE = 101
-    var titleImg : Bitmap? = null
+    var titleImg : String? = null
     var titleString : String? = null
 
     fun spinnerSelect(spinner: Spinner, spinnerCount : Int) {

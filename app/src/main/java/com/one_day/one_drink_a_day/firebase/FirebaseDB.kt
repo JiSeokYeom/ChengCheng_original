@@ -3,6 +3,8 @@ package com.one_day.one_drink_a_day.firebase
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Build
+import android.util.Log
+import android.util.SizeF
 import androidx.annotation.RequiresApi
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -23,6 +25,8 @@ object FirebaseDB {
     var key : String? = null
     fun resultAdd(date : String){
         // 유저 개인 사진과 마신 병 개수 저장
+        Log.d("리스트","resultAdd 들어옴")
+
         for (i in 0..3) {
             database.child("Users")
                 .child(userID!!)
@@ -31,7 +35,8 @@ object FirebaseDB {
                 .child("${SharedObject.titleString}")
                 .child(SharedObject.saveSpinnerCount[i])
                 .child("Img")
-            //    .setValue(SharedObject.imgStringArray[i])
+                .setValue(SharedObject.imgBitmapArray[i].toString())
+            Log.d("리스트","resultAdd 포문 안 ${SharedObject.imgBitmapArray[i]}")
         }
         // 타이틀 이미지와 타이틀 이름 저장
         database.child("Users")
@@ -40,7 +45,7 @@ object FirebaseDB {
             .child(date)
             .child("${SharedObject.titleString}")
             .child("TitleImg")
-            .setValue(SharedObject.titleImg)
+            .setValue(SharedObject.titleImg.toString())
 
         // 전체 DB에 저장
         publicListAdd()
@@ -69,7 +74,8 @@ object FirebaseDB {
             .setValue(etc)
     }
 
-    fun publicListAdd(){
+    private fun publicListAdd(){
+        Log.d("리스트","퍼블릭 리스트 들어옴")
         val resultKey = makeKey()
         // 유저 타이틀 이미지 추가
         database.child("publicList")
@@ -81,7 +87,7 @@ object FirebaseDB {
         // 유저 타이틀 이름 추가
         database.child("publicList")
             .child("ItemList")
-            .child(resultKey!!)
+            .child(resultKey)
             .child("TitleName")
             .setValue(SharedObject.titleString)
 
@@ -99,7 +105,7 @@ object FirebaseDB {
                 .child(resultKey)
                 .child(SharedObject.saveSpinnerCount[i])
                 .child("Img")
-           //     .setValue(SharedObject.imgStringArray[i])
+                .setValue(SharedObject.imgBitmapArray[i])
         }
 
     }

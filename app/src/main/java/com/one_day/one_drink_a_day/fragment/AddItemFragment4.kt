@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -89,7 +91,6 @@ class AddItemFragment4 : Fragment() {
                         }
                         else {
                             FirebaseDB.resultAdd(date!!)
-                            imgBitmapArray = arrayListOf()
                             requireActivity().finish()
                             break
                         }
@@ -114,6 +115,7 @@ class AddItemFragment4 : Fragment() {
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
@@ -130,8 +132,8 @@ class AddItemFragment4 : Fragment() {
                 val result = CropImage.getActivityResult(data)
                 if (resultCode == Activity.RESULT_OK) {
                     result.uri?.let {
-                        SharedObject.imgBitmapArray.add(cropLibrary.setUriToBitmapImage(result.uri)!!)
-                        binding.img4.setImageBitmap(SharedObject.imgBitmapArray[3])
+                        SharedObject.imgBitmapArray.add(cropLibrary.bitmapToString(cropLibrary.setUriToBitmapImage(result.uri)!!)!!)
+                        binding.img4.setImageBitmap(cropLibrary.setUriToBitmapImage(result.uri))
                     }
                 }
             }

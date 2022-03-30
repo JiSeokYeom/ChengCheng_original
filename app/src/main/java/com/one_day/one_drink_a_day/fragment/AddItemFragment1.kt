@@ -86,6 +86,7 @@ class AddItemFragment1 : Fragment() {
         startActivityForResult(intent, SharedObject.GALLERY_CODE)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
@@ -102,8 +103,8 @@ class AddItemFragment1 : Fragment() {
                 val result = CropImage.getActivityResult(data)
                 if (resultCode == Activity.RESULT_OK) {
                     result.uri?.let {
-                        SharedObject.imgBitmapArray.add(cropLibrary.setUriToBitmapImage(result.uri)!!)
-                        binding.img1.setImageBitmap(SharedObject.imgBitmapArray[0])
+                        SharedObject.imgBitmapArray.add(cropLibrary.bitmapToString(cropLibrary.setUriToBitmapImage(result.uri)!!)!!)
+                        binding.img1.setImageBitmap(cropLibrary.setUriToBitmapImage(result.uri))
                     }
                 }
             }
