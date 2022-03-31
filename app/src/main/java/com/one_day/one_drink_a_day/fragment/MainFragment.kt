@@ -56,11 +56,8 @@ class MainFragment : Fragment() {
 
         cropLibrary = CropLibrary(requireActivity(),this)
 
-          titleName = arrayListOf()
-          titleImg = arrayListOf()
         SharedObject.imgBitmapArray.clear()
         Log.d("리스트","클리어 실행 후 ${SharedObject.imgBitmapArray}")
-         // datas = arrayListOf()
 
         itemAdd()
 
@@ -77,8 +74,12 @@ class MainFragment : Fragment() {
         val myRef = FirebaseDB.database.child("publicList").child("ItemList")
         var count  = 0
 
+        titleName = arrayListOf()
+        titleImg = arrayListOf()
+
         myRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
+                datas.clear()
                 for (dataSnapshot : DataSnapshot in snapshot.children){
                     Log.d(TAG,"for문 내부 ${dataSnapshot.child("TitleName").value}")
                     titleName.add(dataSnapshot.child("TitleName").value.toString())
