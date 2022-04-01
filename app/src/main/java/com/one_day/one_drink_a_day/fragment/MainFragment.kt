@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DataSnapshot
@@ -29,7 +30,7 @@ import com.one_day.one_drink_a_day.viewmodel.MainViewModel
 class MainFragment : Fragment() {
     var mainActivity : MainActivity? = null
     private lateinit var adapterRV: MainRvAdapter
-    private var datas = arrayListOf<MainRecyclerViewItem>()
+    private lateinit var datas : MutableList<MainRecyclerViewItem>
     private val TAG = "MainFragment"
     private lateinit var binding : FragmentMainBinding
     private lateinit var mainViewModel : MainViewModel
@@ -51,26 +52,33 @@ class MainFragment : Fragment() {
         mainViewModel = MainViewModel()
         adapterRV = MainRvAdapter()
 
-        binding.mainPersonalRv.setHasFixedSize(true)
-        binding.mainPersonalRv.adapter = adapterRV
+        binding.apply {
+            mainRv.setHasFixedSize(true)
+            mainRv.adapter = adapterRV
+            mainRv.layoutManager = GridLayoutManager(context,3,RecyclerView.VERTICAL,false)
+            mainRv.addItemDecoration(MyItemDecoration())
+        }
+       // datas = mutableListOf()
+
 
         cropLibrary = CropLibrary(requireActivity(),this)
 
         SharedObject.imgBitmapArray.clear()
         Log.d("리스트","클리어 실행 후 ${SharedObject.imgBitmapArray}")
 
-        itemAdd()
+      mainViewModel.getListAll().observe(viewLifecycleOwner) { items ->
+          items.let {
+        //      datas.add()
+          }
+      //    datas.add(items)
+      }
 
-       // Log.d(TAG,"타이틀 이미지 $titleImg")
-       // binding.testImg.setImageBitmap(cropLibrary.stringToBitmap(titleImg[0]))
-        adapterRV.mData = datas
-        binding.mainPersonalRv.layoutManager = GridLayoutManager(context,3,RecyclerView.VERTICAL,false)
-        binding.mainPersonalRv.addItemDecoration(MyItemDecoration())
+     //   adapterRV.mData = datas
         return binding.root
 
     }
 
-    private fun itemAdd(){
+/*    private fun itemAdd(){
         val myRef = FirebaseDB.database.child("publicList").child("ItemList")
         var count  = 0
 
@@ -96,14 +104,14 @@ class MainFragment : Fragment() {
             }
 
         })
-       /* datas.add(MainRecyclerViewItem(R.drawable.testimg,"테스트 1111111"))
+       *//* datas.add(MainRecyclerViewItem(R.drawable.testimg,"테스트 1111111"))
         datas.add(MainRecyclerViewItem(R.drawable.testimg,"테스트 2222222"))
         datas.add(MainRecyclerViewItem(R.drawable.testimg,"테스트 3333333"))
         datas.add(MainRecyclerViewItem(R.drawable.testimg,"테스트 4444444"))
         datas.add(MainRecyclerViewItem(R.drawable.testimg,"테스트 5555555"))
         datas.add(MainRecyclerViewItem(R.drawable.testimg,"테스트 6666666"))
-        datas.add(MainRecyclerViewItem(R.drawable.testimg,"테스트 7777777"))*/
-    }
+        datas.add(MainRecyclerViewItem(R.drawable.testimg,"테스트 7777777"))*//*
+    }*/
 
     override fun onResume() {
         super.onResume()

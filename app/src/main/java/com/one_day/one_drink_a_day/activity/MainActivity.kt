@@ -29,8 +29,6 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG,"실행")
         initNavigationBar()
 
-        // 프래그먼트 처음 선택을 홈프래그먼트로 해야함
-        changeFragment(mainFragment)
         // SharedPreferences를 사용해 한번만 실행 하기기
         // 첫 로그인 성공 후 메인으로 넘어 올 시 주량체크 (한번만 실행 됨)
         val pref = getSharedPreferences("checkFirst",MODE_PRIVATE)
