@@ -9,7 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewTreeLifecycleOwner
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DataSnapshot
@@ -24,16 +27,19 @@ import com.one_day.one_drink_a_day.databinding.FragmentMainBinding
 import com.one_day.one_drink_a_day.firebase.FirebaseDB
 import com.one_day.one_drink_a_day.model.MainRecyclerViewItem
 import com.one_day.one_drink_a_day.style.MyItemDecoration
+import com.one_day.one_drink_a_day.viewmodel.DatePikerViewModel
 import com.one_day.one_drink_a_day.viewmodel.MainViewModel
 
 
 class MainFragment : Fragment() {
     var mainActivity : MainActivity? = null
+    private val mainViewModel: MainViewModel by lazy {
+        ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+    }
     private lateinit var adapterRV: MainRvAdapter
     private lateinit var datas : MutableList<MainRecyclerViewItem>
     private val TAG = "MainFragment"
     private lateinit var binding : FragmentMainBinding
-    private lateinit var mainViewModel : MainViewModel
     private var titleName : ArrayList<String> = arrayListOf()
     private var titleImg : ArrayList<String> = arrayListOf()
 
@@ -49,16 +55,10 @@ class MainFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) : View {
         binding = FragmentMainBinding.inflate(inflater,container,false)
 
-        mainViewModel = MainViewModel()
         adapterRV = MainRvAdapter()
 
-        binding.apply {
-            mainRv.setHasFixedSize(true)
-            mainRv.adapter = adapterRV
-            mainRv.layoutManager = GridLayoutManager(context,3,RecyclerView.VERTICAL,false)
-            mainRv.addItemDecoration(MyItemDecoration())
-        }
-       // datas = mutableListOf()
+        datas = mutableListOf()
+        binding.lifecycleOwner = this
 
 
         cropLibrary = CropLibrary(requireActivity(),this)
@@ -66,14 +66,23 @@ class MainFragment : Fragment() {
         SharedObject.imgBitmapArray.clear()
         Log.d("리스트","클리어 실행 후 ${SharedObject.imgBitmapArray}")
 
-      mainViewModel.getListAll().observe(viewLifecycleOwner) { items ->
-          items.let {
-        //      datas.add()
-          }
-      //    datas.add(items)
-      }
 
-     //   adapterRV.mData = datas
+        binding.apply {
+            mainRv.setHasFixedSize(true)
+            mainRv.adapter = adapterRV
+            mainRv.layoutManager = GridLayoutManager(context,3,RecyclerView.VERTICAL,false)
+            mainRv.addItemDecoration(MyItemDecoration())
+        }
+
+        mainViewModel.getListAll().observe(viewLifecycleOwner) {
+            for (item in it){
+                datas.add(MainRecyclerViewItem(it.))
+                Log.d(TAG,it.toString())
+            }
+        }
+        adapterRV.mData = datas
+
+
         return binding.root
 
     }

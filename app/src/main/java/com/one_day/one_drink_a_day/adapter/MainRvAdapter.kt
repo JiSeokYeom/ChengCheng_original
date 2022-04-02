@@ -12,7 +12,7 @@ import com.one_day.one_drink_a_day.model.MainRecyclerViewItem
 import com.one_day.one_drink_a_day.databinding.RvitemBinding
 
 class MainRvAdapter : RecyclerView.Adapter<MainRvAdapter.ViewHolder>(){
-    var mData = arrayListOf<MainRecyclerViewItem>()
+    var mData = mutableListOf<MainRecyclerViewItem>()
     val cropLibrary = CropLibrary(Activity())
 
     inner class ViewHolder(var binding: RvitemBinding) : RecyclerView.ViewHolder(binding.root){
