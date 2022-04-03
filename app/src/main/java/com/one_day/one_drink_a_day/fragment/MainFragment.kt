@@ -39,6 +39,7 @@ class MainFragment : Fragment() {
     private lateinit var adapterRV: MainRvAdapter
     private lateinit var datas : MutableList<MainRecyclerViewItem>
     private val TAG = "MainFragment"
+    private val myRef = FirebaseDB.database.child("publicList").child("ItemList")
     private lateinit var binding : FragmentMainBinding
     private var titleName : ArrayList<String> = arrayListOf()
     private var titleImg : ArrayList<String> = arrayListOf()
@@ -59,14 +60,10 @@ class MainFragment : Fragment() {
 
         datas = mutableListOf()
         binding.lifecycleOwner = this
+        binding.refresh.setOnRefreshListener {
 
-
-        cropLibrary = CropLibrary(requireActivity(),this)
-
-        SharedObject.imgBitmapArray.clear()
-        Log.d("리스트","클리어 실행 후 ${SharedObject.imgBitmapArray}")
-
-
+            binding.refresh.isRefreshing = false
+        }
         binding.apply {
             mainRv.setHasFixedSize(true)
             mainRv.adapter = adapterRV
@@ -74,19 +71,40 @@ class MainFragment : Fragment() {
             mainRv.addItemDecoration(MyItemDecoration())
         }
 
+      /*  initData()
+        adapterRV.mData = datas*/
+
+
+        cropLibrary = CropLibrary(requireActivity(),this)
+
+        SharedObject.imgBitmapArray.clear()
+
         mainViewModel.getListAll().observe(viewLifecycleOwner) {
-            for (item in it){
-                datas.add(MainRecyclerViewItem(it.))
-                Log.d(TAG,it.toString())
-            }
+            adapterRV.setData(it)
+            mainViewModel.item.clear()
+            adapterRV.notifyDataSetChanged()
         }
-        adapterRV.mData = datas
+
+       // adapterRV.mData = datas
 
 
         return binding.root
 
     }
 
+    private fun initData(){
+        myRef.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (dataSnapshot : DataSnapshot in snapshot.children) {
+                    datas.add(MainRecyclerViewItem(dataSnapshot.child("TitleImg").value.toString(),dataSnapshot.child("TitleName").value.toString()))
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
+    }
 /*    private fun itemAdd(){
         val myRef = FirebaseDB.database.child("publicList").child("ItemList")
         var count  = 0
@@ -125,6 +143,7 @@ class MainFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         Log.d(TAG,"리즘 됨!!!!!!!!!!!!!")
+        mainViewModel.getListAllTest()
     }
 
 }

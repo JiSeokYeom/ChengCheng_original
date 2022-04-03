@@ -39,4 +39,10 @@ class MainRvAdapter : RecyclerView.Adapter<MainRvAdapter.ViewHolder>(){
         return mData.size
     }
 
+    fun setData(data : List<MainRecyclerViewItem>){
+        mData.clear()
+        Log.d("어댑터","mData 클리어후 $mData")
+        mData.addAll(data)
+        Log.d("어댑터","mData 추가 후 $mData")
+    }
 }

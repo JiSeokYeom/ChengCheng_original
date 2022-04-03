@@ -82,4 +82,7 @@ dependencies {
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
 
+    // 스와이프 리프레쉬 레이아웃 라이브러리
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
 }
