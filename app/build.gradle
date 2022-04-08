@@ -85,4 +85,7 @@ dependencies {
     // 스와이프 리프레쉬 레이아웃 라이브러리
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
+    // 프로그래스바 라이브러리
+    implementation "com.github.ybq:Android-SpinKit:1.4.0"
+
 }
