@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.one_day.one_drink_a_day.CropLibrary
-import com.one_day.one_drink_a_day.R
 import com.one_day.one_drink_a_day.SharedObject
 import com.one_day.one_drink_a_day.activity.MainActivity
 import com.one_day.one_drink_a_day.adapter.MainRvAdapter
@@ -49,14 +48,9 @@ class MainFragment : Fragment() {
         adapterRV = MainRvAdapter()
 
         datas = mutableListOf()
-     //   progressDialog = ProgressDialog()
         progressDialog.show(childFragmentManager,"progressDialog")
 
-        Handler().postDelayed(
-            {
-                progressDialog.dismiss()
-            }, 2000
-        )
+
         binding.lifecycleOwner = this
         binding.refresh.setOnRefreshListener {
             binding.refresh.isRefreshing = false
