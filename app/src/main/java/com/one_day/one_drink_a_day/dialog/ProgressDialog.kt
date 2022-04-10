@@ -22,7 +22,6 @@ class ProgressDialog : DialogFragment() {
     private lateinit var binding: ProgressDialogBinding
     private val TAG = "ProgressDialog"
     private val wanderingCubes  = WanderingCubes()
-    private val myRef = FirebaseDB.database.child("publicList")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,23 +34,11 @@ class ProgressDialog : DialogFragment() {
 
         binding.spinKit.setIndeterminateDrawable(wanderingCubes)
 
-        myRef.addListenerForSingleValueEvent(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                for (item : DataSnapshot in snapshot.children){
-                    Log.d(TAG,"안에 아이템 확인 $item")
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-        })
-        loadingProgress(3000)
 
         return binding.root
     }
 
-    private fun loadingProgress(delay : Long){
+     fun loadingProgress(delay : Long){
         Handler().postDelayed({
             dialog?.dismiss()
         }, delay)

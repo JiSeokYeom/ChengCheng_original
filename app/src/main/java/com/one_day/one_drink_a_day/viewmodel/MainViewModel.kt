@@ -13,8 +13,6 @@ class MainViewModel : ViewModel(){
     private val TAG = "MainViewModel"
     private var rvLiveData = MutableLiveData(arrayListOf<MainRecyclerViewItem>())
     private val myRef = FirebaseDB.database.child("publicList").child("ItemList")
-    var itemCnt = 0
-     var item = arrayListOf<MainRecyclerViewItem>()
 
 
     fun getListAll():MutableLiveData<ArrayList<MainRecyclerViewItem>>{
@@ -25,7 +23,6 @@ class MainViewModel : ViewModel(){
                 }
                 rvLiveData.value = rvLiveData.value
                 rvLiveData = MutableLiveData(arrayListOf())
-                Log.d(TAG,"아이템 총 개수 $itemCnt")
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -33,7 +30,6 @@ class MainViewModel : ViewModel(){
             }
         })
 
-        Log.d("뷰모델","아이템 확인 $item")
         return rvLiveData
     }
 
