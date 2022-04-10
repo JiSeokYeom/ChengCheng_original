@@ -16,6 +16,7 @@ import com.one_day.one_drink_a_day.CropLibrary
 import com.one_day.one_drink_a_day.SharedObject
 import com.one_day.one_drink_a_day.activity.MainActivity
 import com.one_day.one_drink_a_day.activity.Splash
+import com.one_day.one_drink_a_day.activity.Splash.Companion.itemArray
 import com.one_day.one_drink_a_day.adapter.MainRvAdapter
 import com.one_day.one_drink_a_day.databinding.FragmentMainBinding
 import com.one_day.one_drink_a_day.dialog.ProgressDialog
@@ -33,8 +34,7 @@ class MainFragment : Fragment() {
     private lateinit var datas : MutableList<MainRecyclerViewItem>
     private val TAG = "MainFragment"
     private val progressDialog = ProgressDialog()
-    private val splash = Splash()
-    private val splashSW = false
+
     private lateinit var binding : FragmentMainBinding
 
     override fun onAttach(context: Context) {
@@ -67,27 +67,13 @@ class MainFragment : Fragment() {
 
         SharedObject.imgBitmapArray.clear()
 
-    /*    if(splashSW){
-            mainViewModel.getListAll().observe(viewLifecycleOwner) {
+
+           mainViewModel.getListAll().observe(viewLifecycleOwner) {
                 adapterRV.setData(it)
                 //     mainViewModel.item.clear()
                 adapterRV.notifyDataSetChanged()
+                Log.d(TAG,"if 안에 들옴")
             }
-        }
-        else{
-            adapterRV.setData(
-                splash.item
-            )
-        }*/
-
-        mainViewModel.getListAll().observe(viewLifecycleOwner) {
-            adapterRV.setData(it)
-            //     mainViewModel.item.clear()
-            adapterRV.notifyDataSetChanged()
-        }
-
-
-        // adapterRV.mData = datas
 
 
         return binding.root

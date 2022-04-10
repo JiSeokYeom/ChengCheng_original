@@ -31,7 +31,7 @@ class Splash : AppCompatActivity() {
 
 
         Log.d(TAG,"유저 존재 확인 ${FirebaseDB.userID}")
-        itemListGet()
+   //     itemListGet()
     if (FirebaseDB.userID != null)
     {
             accountAvailable(mainActivity)
@@ -43,15 +43,20 @@ class Splash : AppCompatActivity() {
 }
 
     private fun accountAvailable(intent: Intent) {
+        binding.loadingText.text = "사용자 정보를 가져오는 중..."
+        Handler().postDelayed({
+            binding.loadingText.text = "게시물을 가져오는 중..."
+        },2000)
         Handler().postDelayed({
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
-         //   overridePendingTransition(anim.fade_in, anim.fade_out)
+
             finish()
-        }, 3000)
+        }, 6000)
     }
 
-    private fun itemListGet(){
+   /* private fun itemListGet(){
+            itemArray.clear()
              myRef.addListenerForSingleValueEvent(object : ValueEventListener{
                override fun onDataChange(snapshot: DataSnapshot) {
                    for (dataSnapshot : DataSnapshot in snapshot.children){
@@ -64,5 +69,5 @@ class Splash : AppCompatActivity() {
                    TODO("Not yet implemented")
                }
            })
-    }
+    }*/
 }
