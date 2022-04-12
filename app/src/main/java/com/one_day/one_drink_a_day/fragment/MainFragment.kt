@@ -3,7 +3,6 @@ package com.one_day.one_drink_a_day.fragment
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,14 +11,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.one_day.one_drink_a_day.CropLibrary
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.one_day.one_drink_a_day.SharedObject
 import com.one_day.one_drink_a_day.activity.MainActivity
-import com.one_day.one_drink_a_day.activity.Splash
-import com.one_day.one_drink_a_day.activity.Splash.Companion.itemArray
 import com.one_day.one_drink_a_day.adapter.MainRvAdapter
 import com.one_day.one_drink_a_day.databinding.FragmentMainBinding
 import com.one_day.one_drink_a_day.dialog.ProgressDialog
+import com.one_day.one_drink_a_day.firebase.FirebaseDB
 import com.one_day.one_drink_a_day.model.MainRecyclerViewItem
 import com.one_day.one_drink_a_day.style.MyItemDecoration
 import com.one_day.one_drink_a_day.viewmodel.MainViewModel
@@ -51,7 +51,7 @@ class MainFragment : Fragment() {
 
 
         datas = mutableListOf()
-        progressDialog.show(childFragmentManager,"progressDialog")
+     //   progressDialog.show(childFragmentManager,"progressDialog")
 
 
         binding.lifecycleOwner = this
@@ -68,11 +68,11 @@ class MainFragment : Fragment() {
         SharedObject.imgBitmapArray.clear()
 
 
-           mainViewModel.getListAll().observe(viewLifecycleOwner) {
+
+          mainViewModel.getListAll().observe(viewLifecycleOwner) {
                 adapterRV.setData(it)
                 //     mainViewModel.item.clear()
                 adapterRV.notifyDataSetChanged()
-                Log.d(TAG,"if 안에 들옴")
             }
 
 
@@ -82,6 +82,7 @@ class MainFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         Log.d(TAG,"리즘 됨!!!!!!!!!!!!!")
+        progressDialog.show(childFragmentManager,"progressDialog")
         progressDialog.loadingProgress(1000)
 
         //  mainViewModel.getListAllTest()
@@ -92,6 +93,8 @@ class MainFragment : Fragment() {
         Log.d(TAG,"포즈 됨!!!!!!!!!!!!!")
 
     }
+
+
 }
 
 

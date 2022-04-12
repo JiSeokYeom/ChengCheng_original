@@ -18,9 +18,8 @@ class Splash : AppCompatActivity() {
     lateinit var binding: ActivitySplashBinding
     private val TAG = "Splash"
     private val myRef = FirebaseDB.database.child("publicList").child("ItemList")
-    companion object{
-        val itemArray : ArrayList<MainRecyclerViewItem> = arrayListOf()
-    }
+    private val itemArray : ArrayList<MainRecyclerViewItem> = arrayListOf()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
@@ -29,9 +28,7 @@ class Splash : AppCompatActivity() {
         val loginActivity = Intent(this, Login::class.java)
         val mainActivity = Intent(this, MainActivity::class.java)
 
-
         Log.d(TAG,"유저 존재 확인 ${FirebaseDB.userID}")
-   //     itemListGet()
     if (FirebaseDB.userID != null)
     {
             accountAvailable(mainActivity)
@@ -43,22 +40,18 @@ class Splash : AppCompatActivity() {
 }
 
     private fun accountAvailable(intent: Intent) {
-        binding.loadingText.text = "사용자 정보를 가져오는 중..."
-        Handler().postDelayed({
-            binding.loadingText.text = "게시물을 가져오는 중..."
-        },2000)
         Handler().postDelayed({
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
 
             finish()
-        }, 6000)
+        }, 3000)
     }
 
-   /* private fun itemListGet(){
+/*    private fun itemListGet(){
             itemArray.clear()
              myRef.addListenerForSingleValueEvent(object : ValueEventListener{
-               override fun onDataChange(snapshot: DataSnapshot) {
+                 override fun onDataChange(snapshot: DataSnapshot) {
                    for (dataSnapshot : DataSnapshot in snapshot.children){
                        itemArray.add(MainRecyclerViewItem(dataSnapshot.child("TitleImg").value.toString(),dataSnapshot.child("TitleName").value.toString()))
                    }
@@ -69,5 +62,5 @@ class Splash : AppCompatActivity() {
                    TODO("Not yet implemented")
                }
            })
-    }*/
-}
+     }*/
+    }
