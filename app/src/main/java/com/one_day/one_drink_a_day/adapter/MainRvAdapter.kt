@@ -4,6 +4,7 @@ import android.app.Activity
 import android.graphics.Bitmap
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -15,14 +16,26 @@ class MainRvAdapter : RecyclerView.Adapter<MainRvAdapter.ViewHolder>(){
     var mData = mutableListOf<MainRecyclerViewItem>()
     val cropLibrary = CropLibrary(Activity())
 
+    interface OnItemClickListener{
+        fun onItemClick(view: View, position: Int)
+    }
+    //객체 저장 변수
+    private lateinit var mOnItemClickListener: OnItemClickListener
+    //객체 전달 메서드
+    fun setOnItemClickListener(onItemClickListener: OnItemClickListener){
+        mOnItemClickListener = onItemClickListener
+    }
     inner class ViewHolder(var binding: RvitemBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(item: MainRecyclerViewItem){
             binding.rvTitleImg.setImageBitmap(cropLibrary.stringToBitmap(item.img))
-         //   binding.rvTitleImg.setImageBitmap(item.img as Bitmap)
             Log.d("어댑터","${cropLibrary.stringToBitmap(item.img)}")
             Log.d("어댑터2", item.img)
 
             binding.rvItemTitle.text = item.title
+            binding.view.setOnClickListener {
+                val itemPos = adapterPosition
+                mOnItemClickListener.onItemClick(binding.view,itemPos)
+            }
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -41,8 +54,6 @@ class MainRvAdapter : RecyclerView.Adapter<MainRvAdapter.ViewHolder>(){
 
     fun setData(data : List<MainRecyclerViewItem>){
         mData.clear()
-        Log.d("어댑터","mData 클리어후 $mData")
         mData.addAll(data)
-        Log.d("어댑터","mData 추가 후 $mData")
     }
 }

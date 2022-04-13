@@ -31,7 +31,6 @@ class MainFragment : Fragment() {
         ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
     }
     private lateinit var adapterRV: MainRvAdapter
-    private lateinit var datas : MutableList<MainRecyclerViewItem>
     private val TAG = "MainFragment"
     private val progressDialog = ProgressDialog()
 
@@ -50,8 +49,6 @@ class MainFragment : Fragment() {
         adapterRV = MainRvAdapter()
 
 
-        datas = mutableListOf()
-     //   progressDialog.show(childFragmentManager,"progressDialog")
 
 
         binding.lifecycleOwner = this
@@ -75,6 +72,11 @@ class MainFragment : Fragment() {
                 adapterRV.notifyDataSetChanged()
             }
 
+        adapterRV.setOnItemClickListener(object : MainRvAdapter.OnItemClickListener{
+            override fun onItemClick(view: View, position: Int) {
+                Log.d(TAG,"포지션 값 $position")
+            }
+        })
 
         return binding.root
 
@@ -84,8 +86,6 @@ class MainFragment : Fragment() {
         Log.d(TAG,"리즘 됨!!!!!!!!!!!!!")
         progressDialog.show(childFragmentManager,"progressDialog")
         progressDialog.loadingProgress(1000)
-
-        //  mainViewModel.getListAllTest()
     }
 
     override fun onPause() {

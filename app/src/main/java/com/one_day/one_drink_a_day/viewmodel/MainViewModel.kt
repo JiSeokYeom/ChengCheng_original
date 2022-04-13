@@ -32,6 +32,23 @@ class MainViewModel : ViewModel(){
 
         return rvLiveData
     }
+    fun getClickListAll():MutableLiveData<ArrayList<MainRecyclerViewItem>>{
+        myRef.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (dataSnapshot : DataSnapshot in snapshot.children) {
+                    rvLiveData.value?.add(MainRecyclerViewItem(dataSnapshot.child("TitleImg").value.toString(),dataSnapshot.child("TitleName").value.toString()))
+                }
+                rvLiveData.value = rvLiveData.value
+                rvLiveData = MutableLiveData(arrayListOf())
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.d(TAG,"데이터 가져오기 오류")
+            }
+        })
+
+        return rvLiveData
+    }
 
     fun dataAdd(mainRecyclerViewItem: MainRecyclerViewItem){
       //  datas.add(mainRecyclerViewItem)
