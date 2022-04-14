@@ -14,7 +14,8 @@ import com.one_day.one_drink_a_day.databinding.RvitemBinding
 
 class MainRvAdapter : RecyclerView.Adapter<MainRvAdapter.ViewHolder>(){
     var mData = mutableListOf<MainRecyclerViewItem>()
-    val cropLibrary = CropLibrary(Activity())
+    private val cropLibrary = CropLibrary(Activity())
+    private val TAG = "MainRvAdapter"
 
     interface OnItemClickListener{
         fun onItemClick(view: View, position: Int)
@@ -28,8 +29,8 @@ class MainRvAdapter : RecyclerView.Adapter<MainRvAdapter.ViewHolder>(){
     inner class ViewHolder(var binding: RvitemBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(item: MainRecyclerViewItem){
             binding.rvTitleImg.setImageBitmap(cropLibrary.stringToBitmap(item.img))
-            Log.d("어댑터","${cropLibrary.stringToBitmap(item.img)}")
-            Log.d("어댑터2", item.img)
+            Log.d(TAG,"${cropLibrary.stringToBitmap(item.img)}")
+            Log.d(TAG, item.img)
 
             binding.rvItemTitle.text = item.title
             binding.view.setOnClickListener {

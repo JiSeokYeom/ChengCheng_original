@@ -58,24 +58,7 @@ class AddItemFragment1 : Fragment() {
             }
 
             SharedObject.spinnerSelect(countSpinner1,0)
-    /*        countSpinner1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    Log.d(TAG, "${countArray[position]} 선택됨")
-                    str = countArray[position].replace("병", "")
-                    Log.d(TAG, "$str 숫자 변환 값")
-                    test = str.toFloat() + str.toFloat()
-                    Log.d(TAG, "$test 숫자 변환 값2")
-                }
 
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    TODO("Not yet implemented")
-                }
-            }*/
         }
         return binding.root
     }

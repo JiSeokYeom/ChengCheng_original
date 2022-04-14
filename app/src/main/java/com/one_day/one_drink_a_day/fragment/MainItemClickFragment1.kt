@@ -1,5 +1,7 @@
 package com.one_day.one_drink_a_day.fragment
 
+import android.content.Intent
+import android.content.Intent.getIntent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,6 +20,8 @@ class MainItemClickFragment1 : Fragment() {
         // Inflate the layout for this fragment
         val binding = FragmentMainItemClick1Binding.inflate(inflater,container,false)
 
+        val parentIntent = Intent()
+        parentIntent.getStringExtra("test")
         parentTextView = requireActivity().findViewById(R.id.main_item_count)
 
 

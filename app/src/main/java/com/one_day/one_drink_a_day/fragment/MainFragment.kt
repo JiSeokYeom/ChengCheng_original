@@ -74,10 +74,11 @@ class MainFragment : Fragment() {
                 //     mainViewModel.item.clear()
                 adapterRV.notifyDataSetChanged()
             }
-        mainViewModel.getClickListAll()
         adapterRV.setOnItemClickListener(object : MainRvAdapter.OnItemClickListener{
             override fun onItemClick(view: View, position: Int) {
                 Log.d(TAG,"포지션 값 $position")
+                mainViewModel.getClickListAll()
+                mainItemClick.putExtra("test",mainViewModel.test[position])
                 startActivity(mainItemClick)
             }
         })

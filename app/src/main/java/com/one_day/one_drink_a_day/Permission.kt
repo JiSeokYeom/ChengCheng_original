@@ -14,12 +14,12 @@ class Permission(val activity : Activity)  {
         // all 메서드를 사용하면 배열 속에 들어 있는 모든 값을 체크할 수 있다.
         val isAllPermissionsGranted =
             permissions.all { activity.checkSelfPermission(it) == PackageManager.PERMISSION_GRANTED }
-        if(isAllPermissionsGranted) {
-            return true
-        } else {
-            // 사용자에 권한 승인 요청
-            ActivityCompat.requestPermissions(activity, permissions, requestCode)
-            return false
-        }
+         return if(isAllPermissionsGranted) {
+             true
+         } else {
+             // 사용자에 권한 승인 요청
+             ActivityCompat.requestPermissions(activity, permissions, requestCode)
+             false
+         }
     }
 }
