@@ -1,5 +1,6 @@
 package com.one_day.one_drink_a_day.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,7 +11,7 @@ import com.one_day.one_drink_a_day.R
 import com.one_day.one_drink_a_day.adapter.MainItemClickPagerAdapter
 import com.one_day.one_drink_a_day.databinding.ActivityMainItemClickBinding
 
-class MainItemClick() : AppCompatActivity() {
+class MainItemClick : AppCompatActivity() {
     private lateinit var binding: ActivityMainItemClickBinding
     private lateinit var mainItemClickPagerAdapter: MainItemClickPagerAdapter
     private lateinit var doubleClickBackPressed : DoubleClickBackPressed
@@ -22,6 +23,10 @@ class MainItemClick() : AppCompatActivity() {
 
         mainItemClickPagerAdapter = MainItemClickPagerAdapter(this)
         doubleClickBackPressed = DoubleClickBackPressed(this)
+
+        val parentIntent = Intent()
+        val test = parentIntent.getStringExtra("test")
+        Log.d(TAG, "$test")
 
         binding.apply {
 

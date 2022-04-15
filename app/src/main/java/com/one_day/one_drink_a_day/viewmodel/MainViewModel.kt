@@ -14,7 +14,7 @@ class MainViewModel : ViewModel(){
     private var rvLiveData = MutableLiveData(arrayListOf<MainRecyclerViewItem>())
     private val myRef = FirebaseDB.database.child("publicList").child("ItemList")
     private var cnt = 0
-    var test : HashMap<Int,String> = hashMapOf()
+    var test : HashMap<Int,HashMap<String,String>> = hashMapOf()
 
 
     fun getListAll():MutableLiveData<ArrayList<MainRecyclerViewItem>>{
@@ -40,7 +40,8 @@ class MainViewModel : ViewModel(){
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (dataSnapshot : DataSnapshot in snapshot.children) {
                     Log.d(TAG, "${dataSnapshot.child("TitleName").value} \n ${dataSnapshot.value}")
-                    test[cnt] = dataSnapshot.value.toString()
+                    test[cnt] = dataSnapshot.value as HashMap<String, String>
+                    Log.d(TAG,"해쉬맵 안에 ${test[cnt]}")
                     cnt++
                 }
             }

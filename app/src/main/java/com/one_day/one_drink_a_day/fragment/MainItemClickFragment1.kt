@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.one_day.one_drink_a_day.R
+import com.one_day.one_drink_a_day.activity.MainItemClick
 import com.one_day.one_drink_a_day.databinding.FragmentMainItemClick1Binding
 import org.w3c.dom.Text
 
@@ -20,8 +21,6 @@ class MainItemClickFragment1 : Fragment() {
         // Inflate the layout for this fragment
         val binding = FragmentMainItemClick1Binding.inflate(inflater,container,false)
 
-        val parentIntent = Intent()
-        parentIntent.getStringExtra("test")
         parentTextView = requireActivity().findViewById(R.id.main_item_count)
 
 

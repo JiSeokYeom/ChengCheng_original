@@ -78,7 +78,6 @@ class MainFragment : Fragment() {
             override fun onItemClick(view: View, position: Int) {
                 Log.d(TAG,"포지션 값 $position")
                 mainViewModel.getClickListAll()
-                mainItemClick.putExtra("test",mainViewModel.test[position])
                 startActivity(mainItemClick)
             }
         })
