@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import com.one_day.one_drink_a_day.R
 import com.one_day.one_drink_a_day.activity.MainItemClick
 import com.one_day.one_drink_a_day.databinding.FragmentMainItemClick1Binding
+import com.one_day.one_drink_a_day.firebase.FirebaseRead
 import org.w3c.dom.Text
 
 class MainItemClickFragment1 : Fragment() {
@@ -23,6 +24,7 @@ class MainItemClickFragment1 : Fragment() {
 
         parentTextView = requireActivity().findViewById(R.id.main_item_count)
 
+        Log.d(TAG,"${FirebaseRead.test[MainItemClick.itemClickPosition]?.keys}")
 
 
         return binding.root

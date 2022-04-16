@@ -16,6 +16,9 @@ class MainItemClick : AppCompatActivity() {
     private lateinit var mainItemClickPagerAdapter: MainItemClickPagerAdapter
     private lateinit var doubleClickBackPressed : DoubleClickBackPressed
     private val TAG = "MainItemClick"
+    companion object{
+        var itemClickPosition = 0
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainItemClickBinding.inflate(layoutInflater)
@@ -24,9 +27,9 @@ class MainItemClick : AppCompatActivity() {
         mainItemClickPagerAdapter = MainItemClickPagerAdapter(this)
         doubleClickBackPressed = DoubleClickBackPressed(this)
 
-        val parentIntent = Intent()
-        val test = parentIntent.getStringExtra("test")
-        Log.d(TAG, "$test")
+        val parentIntent = intent
+        itemClickPosition = parentIntent.getIntExtra("pos",0)
+        Log.d(TAG, "$itemClickPosition")
 
         binding.apply {
 

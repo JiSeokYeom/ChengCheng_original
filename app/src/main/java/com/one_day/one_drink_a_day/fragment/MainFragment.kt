@@ -23,6 +23,8 @@ import com.one_day.one_drink_a_day.adapter.MainRvAdapter
 import com.one_day.one_drink_a_day.databinding.FragmentMainBinding
 import com.one_day.one_drink_a_day.dialog.ProgressDialog
 import com.one_day.one_drink_a_day.firebase.FirebaseDB
+import com.one_day.one_drink_a_day.firebase.FirebaseRead
+import com.one_day.one_drink_a_day.firebase.FirebaseRead.getClickListAll
 import com.one_day.one_drink_a_day.model.MainRecyclerViewItem
 import com.one_day.one_drink_a_day.style.MyItemDecoration
 import com.one_day.one_drink_a_day.viewmodel.MainViewModel
@@ -52,7 +54,7 @@ class MainFragment : Fragment() {
 
         adapterRV = MainRvAdapter()
 
-        val mainItemClick = Intent(requireContext(), MainItemClick::class.java)
+        val mainItemClick = Intent(requireActivity(), MainItemClick::class.java)
 
         binding.lifecycleOwner = this
         binding.refresh.setOnRefreshListener {
@@ -77,7 +79,8 @@ class MainFragment : Fragment() {
         adapterRV.setOnItemClickListener(object : MainRvAdapter.OnItemClickListener{
             override fun onItemClick(view: View, position: Int) {
                 Log.d(TAG,"포지션 값 $position")
-                mainViewModel.getClickListAll()
+                getClickListAll()
+                mainItemClick.putExtra("pos",position)
                 startActivity(mainItemClick)
             }
         })

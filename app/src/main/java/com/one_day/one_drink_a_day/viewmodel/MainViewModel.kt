@@ -13,8 +13,6 @@ class MainViewModel : ViewModel(){
     private val TAG = "MainViewModel"
     private var rvLiveData = MutableLiveData(arrayListOf<MainRecyclerViewItem>())
     private val myRef = FirebaseDB.database.child("publicList").child("ItemList")
-    private var cnt = 0
-    var test : HashMap<Int,HashMap<String,String>> = hashMapOf()
 
 
     fun getListAll():MutableLiveData<ArrayList<MainRecyclerViewItem>>{
@@ -33,23 +31,6 @@ class MainViewModel : ViewModel(){
         })
 
         return rvLiveData
-    }
-    fun getClickListAll(){
-        cnt = 0
-        myRef.addValueEventListener(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                for (dataSnapshot : DataSnapshot in snapshot.children) {
-                    Log.d(TAG, "${dataSnapshot.child("TitleName").value} \n ${dataSnapshot.value}")
-                    test[cnt] = dataSnapshot.value as HashMap<String, String>
-                    Log.d(TAG,"해쉬맵 안에 ${test[cnt]}")
-                    cnt++
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Log.d(TAG,"데이터 가져오기 오류")
-            }
-        })
     }
 
     fun dataAdd(mainRecyclerViewItem: MainRecyclerViewItem){

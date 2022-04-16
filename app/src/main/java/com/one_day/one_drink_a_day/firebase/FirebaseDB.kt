@@ -103,6 +103,7 @@ object FirebaseDB {
             database.child("publicList")
                 .child("ItemList")
                 .child(resultKey)
+                .child("ImgList")
                 .child(SharedObject.saveSpinnerCount[i])
                 .child("Img")
                 .setValue(SharedObject.imgBitmapArray[i])
