@@ -12,20 +12,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
 import com.one_day.one_drink_a_day.SharedObject
 import com.one_day.one_drink_a_day.activity.MainActivity
 import com.one_day.one_drink_a_day.activity.MainItemClick
-import com.one_day.one_drink_a_day.activity.TitleInput
 import com.one_day.one_drink_a_day.adapter.MainRvAdapter
 import com.one_day.one_drink_a_day.databinding.FragmentMainBinding
 import com.one_day.one_drink_a_day.dialog.ProgressDialog
-import com.one_day.one_drink_a_day.firebase.FirebaseDB
-import com.one_day.one_drink_a_day.firebase.FirebaseRead
-import com.one_day.one_drink_a_day.firebase.FirebaseRead.getClickListAll
-import com.one_day.one_drink_a_day.model.MainRecyclerViewItem
+import com.one_day.one_drink_a_day.firebase.FirebaseRead.getClickImgListAll
 import com.one_day.one_drink_a_day.style.MyItemDecoration
 import com.one_day.one_drink_a_day.viewmodel.MainViewModel
 
@@ -79,7 +72,7 @@ class MainFragment : Fragment() {
         adapterRV.setOnItemClickListener(object : MainRvAdapter.OnItemClickListener{
             override fun onItemClick(view: View, position: Int) {
                 Log.d(TAG,"포지션 값 $position")
-                getClickListAll()
+                getClickImgListAll()
                 mainItemClick.putExtra("pos",position)
                 startActivity(mainItemClick)
             }

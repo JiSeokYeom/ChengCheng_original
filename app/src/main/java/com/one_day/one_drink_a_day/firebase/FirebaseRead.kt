@@ -12,13 +12,13 @@ object FirebaseRead {
     var test : HashMap<Int,HashMap<String,String>> = hashMapOf()
 
 
-    fun getClickListAll() {
+    fun getClickImgListAll() {
         cnt = 0
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (dataSnapshot : DataSnapshot in snapshot.children) {
-                    Log.d(TAG, "${dataSnapshot.child("TitleName").value} \n ${dataSnapshot.value}")
-                    test[cnt] = dataSnapshot.value as HashMap<String, String>
+                    Log.d(TAG, "${dataSnapshot.child("ImgList").value}")
+                    test[cnt] = dataSnapshot.child("ImgList").value as HashMap<String, String>
                     Log.d(TAG,"해쉬맵 안에 ${test[cnt]}")
                     cnt++
                 }

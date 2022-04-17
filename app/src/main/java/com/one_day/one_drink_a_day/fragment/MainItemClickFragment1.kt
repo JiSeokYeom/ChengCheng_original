@@ -18,7 +18,7 @@ import org.w3c.dom.Text
 class MainItemClickFragment1 : Fragment() {
     private lateinit var parentTextView : TextView
     private val TAG = "MainItemClickFragment1"
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
         val binding = FragmentMainItemClick1Binding.inflate(inflater,container,false)
 

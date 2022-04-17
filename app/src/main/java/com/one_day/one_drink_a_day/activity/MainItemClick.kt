@@ -10,6 +10,7 @@ import com.one_day.one_drink_a_day.DoubleClickBackPressed
 import com.one_day.one_drink_a_day.R
 import com.one_day.one_drink_a_day.adapter.MainItemClickPagerAdapter
 import com.one_day.one_drink_a_day.databinding.ActivityMainItemClickBinding
+import com.one_day.one_drink_a_day.firebase.FirebaseRead
 
 class MainItemClick : AppCompatActivity() {
     private lateinit var binding: ActivityMainItemClickBinding
@@ -18,6 +19,7 @@ class MainItemClick : AppCompatActivity() {
     private val TAG = "MainItemClick"
     companion object{
         var itemClickPosition = 0
+        var alcoholCount : ArrayList<String> = arrayListOf()
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +31,11 @@ class MainItemClick : AppCompatActivity() {
 
         val parentIntent = intent
         itemClickPosition = parentIntent.getIntExtra("pos",0)
+        alcoholCount.add(FirebaseRead.test[itemClickPosition]?.keys.toString())
         Log.d(TAG, "$itemClickPosition")
+        Log.d(TAG, "카운트 $alcoholCount")
+
+
 
         binding.apply {
 
