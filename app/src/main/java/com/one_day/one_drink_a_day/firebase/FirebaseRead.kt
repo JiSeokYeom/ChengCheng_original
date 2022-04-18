@@ -9,7 +9,7 @@ object FirebaseRead {
     private val TAG = "FirebaseRead"
     private val myRef = FirebaseDB.database.child("publicList").child("ItemList")
     private var cnt = 0
-    var test : HashMap<Int,HashMap<String,String>> = hashMapOf()
+    var imgHashMap : HashMap<Int,HashMap<String,String>> = hashMapOf()
 
 
     fun getClickImgListAll() {
@@ -18,8 +18,7 @@ object FirebaseRead {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (dataSnapshot : DataSnapshot in snapshot.children) {
                     Log.d(TAG, "${dataSnapshot.child("ImgList").value}")
-                    test[cnt] = dataSnapshot.child("ImgList").value as HashMap<String, String>
-                    Log.d(TAG,"해쉬맵 안에 ${test[cnt]}")
+                    imgHashMap[cnt] = dataSnapshot.child("ImgList").value as HashMap<String, String>
                     cnt++
                 }
             }
@@ -29,4 +28,6 @@ object FirebaseRead {
             }
         })
     }
+
+
 }

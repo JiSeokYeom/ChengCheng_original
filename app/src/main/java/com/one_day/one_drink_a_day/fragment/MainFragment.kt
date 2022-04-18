@@ -24,7 +24,6 @@ import com.one_day.one_drink_a_day.viewmodel.MainViewModel
 
 
 class MainFragment : Fragment() {
-    var mainActivity : MainActivity? = null
     private val mainViewModel: MainViewModel by lazy {
         ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
     }
@@ -34,13 +33,7 @@ class MainFragment : Fragment() {
     private val progressDialog = ProgressDialog()
 
     private lateinit var binding : FragmentMainBinding
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        mainActivity = context as MainActivity
-    }
-
-
+    
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) : View {
         binding = FragmentMainBinding.inflate(inflater,container,false)

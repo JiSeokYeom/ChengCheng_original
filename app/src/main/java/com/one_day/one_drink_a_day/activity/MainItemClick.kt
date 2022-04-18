@@ -1,6 +1,5 @@
 package com.one_day.one_drink_a_day.activity
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -17,6 +16,9 @@ class MainItemClick : AppCompatActivity() {
     private lateinit var mainItemClickPagerAdapter: MainItemClickPagerAdapter
     private lateinit var doubleClickBackPressed : DoubleClickBackPressed
     private val TAG = "MainItemClick"
+    private var cnt = 0
+    private var alcoholCountKeyHash : HashMap<String,String> = hashMapOf()
+
     companion object{
         var itemClickPosition = 0
         var alcoholCount : ArrayList<String> = arrayListOf()
@@ -31,9 +33,10 @@ class MainItemClick : AppCompatActivity() {
 
         val parentIntent = intent
         itemClickPosition = parentIntent.getIntExtra("pos",0)
-        alcoholCount.add(FirebaseRead.test[itemClickPosition]?.keys.toString())
         Log.d(TAG, "$itemClickPosition")
-        Log.d(TAG, "카운트 $alcoholCount")
+        alcoholCountKeyHash = FirebaseRead.imgHashMap[itemClickPosition]!!
+        test()
+
 
 
 
@@ -68,6 +71,21 @@ class MainItemClick : AppCompatActivity() {
             mainItemBtnBack.setOnClickListener {
                 val currentBack = mainItemViewpager.currentItem
                 mainItemViewpager.setCurrentItem(currentBack-1,true)
+            }
+        }
+    }
+
+    private fun test(){
+        alcoholCount.clear()
+        for( key : String in alcoholCountKeyHash.keys){
+            Log.d(TAG,"해쉬맵의 키들 ${alcoholCountKeyHash.keys}")
+            when (key){
+                "0병" -> alcoholCount.add(alcoholCountKeyHash["0병"].toString())
+                "1병" -> alcoholCount.add(alcoholCountKeyHash["1병"].toString())
+                "2병" -> alcoholCount.add(alcoholCountKeyHash["2병"].toString())
+                "3병" -> alcoholCount.add(alcoholCountKeyHash["3병"].toString())
+                "4병" -> alcoholCount.add(alcoholCountKeyHash["4병"].toString())
+                else -> alcoholCount.add(alcoholCountKeyHash["5병이상"].toString())
             }
         }
     }

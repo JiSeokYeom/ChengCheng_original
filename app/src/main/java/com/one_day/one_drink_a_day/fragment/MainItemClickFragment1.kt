@@ -1,7 +1,5 @@
 package com.one_day.one_drink_a_day.fragment
 
-import android.content.Intent
-import android.content.Intent.getIntent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,10 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.one_day.one_drink_a_day.R
-import com.one_day.one_drink_a_day.activity.MainItemClick
 import com.one_day.one_drink_a_day.databinding.FragmentMainItemClick1Binding
-import com.one_day.one_drink_a_day.firebase.FirebaseRead
-import org.w3c.dom.Text
 
 class MainItemClickFragment1 : Fragment() {
     private lateinit var parentTextView : TextView
@@ -23,9 +18,6 @@ class MainItemClickFragment1 : Fragment() {
         val binding = FragmentMainItemClick1Binding.inflate(inflater,container,false)
 
         parentTextView = requireActivity().findViewById(R.id.main_item_count)
-
-        Log.d(TAG,"${FirebaseRead.test[MainItemClick.itemClickPosition]?.keys}")
-
 
         return binding.root
     }

@@ -34,7 +34,6 @@ object FirebaseDB {
                 .child(date)
                 .child("${SharedObject.titleString}")
                 .child(SharedObject.saveSpinnerCount[i])
-                .child("Img")
                 .setValue(SharedObject.imgBitmapArray[i].toString())
             Log.d("리스트","resultAdd 포문 안 ${SharedObject.imgBitmapArray[i]}")
         }
@@ -105,7 +104,6 @@ object FirebaseDB {
                 .child(resultKey)
                 .child("ImgList")
                 .child(SharedObject.saveSpinnerCount[i])
-                .child("Img")
                 .setValue(SharedObject.imgBitmapArray[i])
         }
 
