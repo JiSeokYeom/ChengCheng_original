@@ -1,7 +1,6 @@
 package com.one_day.one_drink_a_day.fragment
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -13,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.one_day.one_drink_a_day.SharedObject
-import com.one_day.one_drink_a_day.activity.MainActivity
 import com.one_day.one_drink_a_day.activity.MainItemClick
 import com.one_day.one_drink_a_day.adapter.MainRvAdapter
 import com.one_day.one_drink_a_day.databinding.FragmentMainBinding
@@ -33,7 +31,7 @@ class MainFragment : Fragment() {
     private val progressDialog = ProgressDialog()
 
     private lateinit var binding : FragmentMainBinding
-    
+
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) : View {
         binding = FragmentMainBinding.inflate(inflater,container,false)
@@ -57,7 +55,7 @@ class MainFragment : Fragment() {
 
 
 
-          mainViewModel.getListAll().observe(viewLifecycleOwner) {
+          mainViewModel.rvLiveData.observe(viewLifecycleOwner) {
                 adapterRV.setData(it)
                 //     mainViewModel.item.clear()
                 adapterRV.notifyDataSetChanged()
@@ -77,6 +75,7 @@ class MainFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         Log.d(TAG,"리즘 됨!!!!!!!!!!!!!")
+        adapterRV.notifyDataSetChanged()
         progressDialog.show(childFragmentManager,"progressDialog")
         progressDialog.loadingProgress(1000)
     }

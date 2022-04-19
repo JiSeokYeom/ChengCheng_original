@@ -4,25 +4,32 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.one_day.one_drink_a_day.DoubleClickBackPressed
 import com.one_day.one_drink_a_day.R
 import com.one_day.one_drink_a_day.adapter.MainItemClickPagerAdapter
 import com.one_day.one_drink_a_day.databinding.ActivityMainItemClickBinding
 import com.one_day.one_drink_a_day.firebase.FirebaseRead
+import com.one_day.one_drink_a_day.viewmodel.MainItemClickViewModel
+import com.one_day.one_drink_a_day.viewmodel.MainViewModel
 
 class MainItemClick : AppCompatActivity() {
+    private val mainItemClickViewModel: MainItemClickViewModel by lazy {
+        ViewModelProvider(this).get(MainItemClickViewModel::class.java)
+    }
     private lateinit var binding: ActivityMainItemClickBinding
     private lateinit var mainItemClickPagerAdapter: MainItemClickPagerAdapter
-    private lateinit var doubleClickBackPressed : DoubleClickBackPressed
+    private lateinit var doubleClickBackPressed: DoubleClickBackPressed
     private val TAG = "MainItemClick"
     private var cnt = 0
-    private var alcoholCountKeyHash : HashMap<String,String> = hashMapOf()
+  //  private var alcoholCountKeyHash: HashMap<String, String> = hashMapOf()
 
-    companion object{
+    companion object {
         var itemClickPosition = 0
-        var alcoholCount : ArrayList<String> = arrayListOf()
+      //  var alcoholCount: ArrayList<String> = arrayListOf()
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainItemClickBinding.inflate(layoutInflater)
@@ -32,32 +39,33 @@ class MainItemClick : AppCompatActivity() {
         doubleClickBackPressed = DoubleClickBackPressed(this)
 
         val parentIntent = intent
-        itemClickPosition = parentIntent.getIntExtra("pos",0)
+        itemClickPosition = parentIntent.getIntExtra("pos", 0)
         Log.d(TAG, "$itemClickPosition")
-        alcoholCountKeyHash = FirebaseRead.imgHashMap[itemClickPosition]!!
-        test()
 
 
+       // mainItemClickViewModel.getItemKey() 아까 주석
+
+       // alcoholCountKeyHash = FirebaseRead.imgHashMap[itemClickPosition]!!
+       // test()
 
 
         binding.apply {
 
             mainItemViewpager.adapter = mainItemClickPagerAdapter
-            mainItemViewpager.orientation  = ViewPager2.ORIENTATION_HORIZONTAL
+            mainItemViewpager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
             mainItemSpringDotsIndicator.setViewPager2(mainItemViewpager)
 
-            mainItemViewpager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+            mainItemViewpager.registerOnPageChangeCallback(object :
+                ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
-                    Log.d(TAG,"리스너 안 $position")
-                    if(position==0){
+                    Log.d(TAG, "리스너 안 $position")
+                    if (position == 0) {
                         mainItemBtnBack.visibility = View.GONE
-                    }
-                    else if(position==3){
+                    } else if (position == 3) {
                         mainItemBtnNext.visibility = View.GONE
-                    }
-                    else{
+                    } else {
                         mainItemBtnBack.visibility = View.VISIBLE
                         mainItemBtnNext.visibility = View.VISIBLE
                     }
@@ -65,21 +73,21 @@ class MainItemClick : AppCompatActivity() {
             })
             mainItemBtnNext.setOnClickListener {
                 val currentNext = mainItemViewpager.currentItem
-                mainItemViewpager.setCurrentItem(currentNext+1, true)
+                mainItemViewpager.setCurrentItem(currentNext + 1, true)
             }
 
             mainItemBtnBack.setOnClickListener {
                 val currentBack = mainItemViewpager.currentItem
-                mainItemViewpager.setCurrentItem(currentBack-1,true)
+                mainItemViewpager.setCurrentItem(currentBack - 1, true)
             }
         }
     }
 
-    private fun test(){
+   /* private fun test() {
         alcoholCount.clear()
-        for( key : String in alcoholCountKeyHash.keys){
-            Log.d(TAG,"해쉬맵의 키들 ${alcoholCountKeyHash.keys}")
-            when (key){
+        for (key: String in alcoholCountKeyHash.keys) {
+            Log.d(TAG, "해쉬맵의 키들 ${alcoholCountKeyHash.keys}")
+            when (key) {
                 "0병" -> alcoholCount.add(alcoholCountKeyHash["0병"].toString())
                 "1병" -> alcoholCount.add(alcoholCountKeyHash["1병"].toString())
                 "2병" -> alcoholCount.add(alcoholCountKeyHash["2병"].toString())
@@ -88,7 +96,8 @@ class MainItemClick : AppCompatActivity() {
                 else -> alcoholCount.add(alcoholCountKeyHash["5병이상"].toString())
             }
         }
-    }
+    }*/
+
     override fun onBackPressed() {
         if (binding.mainItemViewpager.currentItem == 0) {
             // 사용자가 첫 번째 페이지에서 뒤로가기 버튼을 누르면 finish 하도록 하고

@@ -34,7 +34,7 @@ object FirebaseDB {
                 .child(date)
                 .child("${SharedObject.titleString}")
                 .child(SharedObject.saveSpinnerCount[i])
-                .setValue(SharedObject.imgBitmapArray[i].toString())
+                .setValue(SharedObject.imgBitmapArray[i])
             Log.d("리스트","resultAdd 포문 안 ${SharedObject.imgBitmapArray[i]}")
         }
         // 타이틀 이미지와 타이틀 이름 저장
