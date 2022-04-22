@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val mainFragment = MainFragment()
     private val myPageFragment = MypageFragment()
-    private val checkDialog = AlcoholCheckDialog()
     private val TAG = "MainActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,18 +31,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         Log.d(TAG,"실행")
         initNavigationBar()
-        // SharedPreferences를 사용해 한번만 실행 하기기
-        // 첫 로그인 성공 후 메인으로 넘어 올 시 주량체크 (한번만 실행 됨)
-        val pref = getSharedPreferences("checkFirst",MODE_PRIVATE)
-        val checkFirst : Boolean = pref.getBoolean("checkFirst",false)
-        if(!checkFirst){
-            val editor : SharedPreferences.Editor = pref.edit()
-            editor.putBoolean("checkFirst",true)
-
-            editor.apply()
-            FirebaseDB.userAdd()
-            checkDialog.show(supportFragmentManager, "AlcoholCheckDialog")
-        }
 
     }
 

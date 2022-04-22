@@ -10,7 +10,6 @@ import com.one_day.one_drink_a_day.model.MainRecyclerViewItem
 object FirebaseRead {
     private val TAG = "FirebaseRead"
     private val myRef = FirebaseDB.database.child("publicList").child("ItemList")
-    private val testMyRef = FirebaseDB.database.child("publicList").child("ItemList").child("ImgList")
     private var cnt = 0
     var mainRvLiveData = MutableLiveData(arrayListOf<MainRecyclerViewItem>())
     var imgHashMap: LinkedHashMap<Int, HashMap<String, Any>> = linkedMapOf()
@@ -21,7 +20,6 @@ object FirebaseRead {
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (dataSnapshot: DataSnapshot in snapshot.children) {
-                //    Log.d(TAG, "${dataSnapshot.child("ImgList").value}")
                     imgHashMap[cnt] = dataSnapshot.child("ImgList").value as HashMap<String, Any>
                     Log.d(TAG, "키 값 ${imgHashMap[cnt]?.keys}")
                     cnt++
