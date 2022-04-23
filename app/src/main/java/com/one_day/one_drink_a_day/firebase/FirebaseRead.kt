@@ -12,7 +12,7 @@ object FirebaseRead {
     private val myRef = FirebaseDB.database.child("publicList").child("ItemList")
     private var cnt = 0
     var mainRvLiveData = MutableLiveData(arrayListOf<MainRecyclerViewItem>())
-    var imgHashMap: LinkedHashMap<Int, HashMap<String, Any>> = linkedMapOf()
+    var imgHashMap: HashMap<Int, HashMap<String, String>> = hashMapOf()
 
 
     fun getClickImgListAll() {
@@ -20,7 +20,7 @@ object FirebaseRead {
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (dataSnapshot: DataSnapshot in snapshot.children) {
-                    imgHashMap[cnt] = dataSnapshot.child("ImgList").value as HashMap<String, Any>
+                    imgHashMap[cnt] = dataSnapshot.child("ImgList").value as HashMap<String, String>
                     Log.d(TAG, "키 값 ${imgHashMap[cnt]?.keys}")
                     cnt++
                 }

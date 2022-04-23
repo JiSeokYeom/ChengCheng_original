@@ -7,14 +7,14 @@ import com.one_day.one_drink_a_day.activity.MainItemClick.Companion.itemClickPos
 import com.one_day.one_drink_a_day.firebase.FirebaseRead
 
 class MainItemClickViewModel : ViewModel() {
-    private var alcoholCountKeyHash: LinkedHashMap<String, String> = linkedMapOf()
+    private var alcoholCountKeyHash: HashMap<String, String> = hashMapOf()
     private val TAG = "MainItemClickViewModel"
 
     companion object{
         var alcoholCount: ArrayList<String> = arrayListOf()
     }
 
-/*   fun getItemKey(){
+   fun getItemKey(){
        alcoholCountKeyHash = FirebaseRead.imgHashMap[itemClickPosition]!!
        alcoholCount.clear()
         for (key: String in alcoholCountKeyHash.keys) {
@@ -32,7 +32,7 @@ class MainItemClickViewModel : ViewModel() {
        for (i in 0 until alcoholCount.size){
            Log.d(TAG,"카운트 안에 값 ${alcoholCount[i]}")
        }
-    }*/
+    }
 
 
 }
