@@ -11,21 +11,18 @@ class MainItemClickViewModel : ViewModel() {
     private val TAG = "MainItemClickViewModel"
 
     companion object{
-        var alcoholCount: ArrayList<String> = arrayListOf()
+        var alcoholCount: ArrayList<String> = arrayListOf("tmp","tmp","tmp","tmp")
     }
 
    fun getItemKey(){
        alcoholCountKeyHash = FirebaseRead.imgHashMap[itemClickPosition]!!
-       alcoholCount.clear()
         for (key: String in alcoholCountKeyHash.keys) {
             Log.d(TAG, "해쉬맵의 키들 ${alcoholCountKeyHash.keys}")
             when (key) {
-                "0병" -> alcoholCount.add(alcoholCountKeyHash["0병"].toString())
-                "1병" -> alcoholCount.add(alcoholCountKeyHash["1병"].toString())
-                "2병" -> alcoholCount.add(alcoholCountKeyHash["2병"].toString())
-                "3병" -> alcoholCount.add(alcoholCountKeyHash["3병"].toString())
-                "4병" -> alcoholCount.add(alcoholCountKeyHash["4병"].toString())
-                else -> alcoholCount.add(alcoholCountKeyHash["5병이상"].toString())
+                "1병" -> alcoholCount[0] = alcoholCountKeyHash["1병"].toString()
+                "2병" -> alcoholCount[3] = alcoholCountKeyHash["2병"].toString()
+                "3병" -> alcoholCount[2] = alcoholCountKeyHash["3병"].toString()
+                else -> alcoholCount[1] = alcoholCountKeyHash["4병"].toString()
             }
         }
 

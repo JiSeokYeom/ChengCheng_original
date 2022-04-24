@@ -25,7 +25,7 @@ class MainItemClickFragment2 : Fragment() {
         cropLibrary = CropLibrary(requireActivity())
 
         parentTextView = requireActivity().findViewById(R.id.main_item_count)
-        //binding.frgImg2.setImageBitmap(cropLibrary.stringToBitmap(MainItemClickViewModel.alcoholCount[1]))
+        binding.frgImg2.setImageBitmap(cropLibrary.stringToBitmap(MainItemClickViewModel.alcoholCount[3]))
 
 
         return binding.root
@@ -33,7 +33,7 @@ class MainItemClickFragment2 : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        parentTextView.text = "테스트요2"
+        parentTextView.text = "2병"
         Log.d(TAG,"프래그2")
     }
 

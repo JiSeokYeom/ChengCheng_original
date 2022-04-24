@@ -25,13 +25,13 @@ class MainItemClickFragment1 : Fragment() {
 
         parentTextView = requireActivity().findViewById(R.id.main_item_count)
 
-//        binding.frgImg1.setImageBitmap(cropLibrary.stringToBitmap(MainItemClickViewModel.alcoholCount[0]))
+        binding.frgImg1.setImageBitmap(cropLibrary.stringToBitmap(MainItemClickViewModel.alcoholCount[0]))
         return binding.root
     }
 
     override fun onResume() {
         super.onResume()
-        parentTextView.text = "테스트요"
+        parentTextView.text = "1병"
         Log.d(TAG,"프래그 1")
     }
 }

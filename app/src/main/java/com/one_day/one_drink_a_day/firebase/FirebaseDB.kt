@@ -26,28 +26,36 @@ object FirebaseDB {
     fun resultAdd(date : String){
         // 유저 개인 사진과 마신 병 개수 저장
         Log.d("리스트","resultAdd 들어옴")
-
+        val resultKey = makeKey()
+        // 유저 개인 사진과 마신 병 개수 저장
         for (i in 0..3) {
             database.child("Users")
                 .child(userID!!)
                 .child("ItemList")
-                .child(date)
-                .child("${SharedObject.titleString}")
+                .child(resultKey!!)
+                .child("ImgList")
                 .child(SharedObject.saveSpinnerCount[i])
                 .setValue(SharedObject.imgBitmapArray[i])
-            Log.d("리스트","resultAdd 포문 안 ${SharedObject.imgBitmapArray[i]}")
         }
-        // 타이틀 이미지와 타이틀 이름 저장
+
+        // 유저 타이틀 이미지 추가
         database.child("Users")
             .child(userID!!)
             .child("ItemList")
-            .child(date)
-            .child("${SharedObject.titleString}")
+            .child(resultKey!!)
             .child("TitleImg")
-            .setValue(SharedObject.titleImg.toString())
+            .setValue(SharedObject.titleImg)
 
-        // 전체 DB에 저장
+        // 유저 타이틀 이름 추가
+        database.child("Users")
+            .child(userID)
+            .child("ItemList")
+            .child(resultKey)
+            .child("TitleName")
+            .setValue(SharedObject.titleString)
+
         publicListAdd()
+
     }
     fun userAdd(){
         database.child("Users")

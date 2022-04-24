@@ -10,12 +10,31 @@ import com.one_day.one_drink_a_day.model.MainRecyclerViewItem
 object FirebaseRead {
     private val TAG = "FirebaseRead"
     private val myRef = FirebaseDB.database.child("publicList").child("ItemList")
+    private val personalMyRef = FirebaseDB.database.child("Users").child(FirebaseDB.userID!!).child("ItemList")
     private var cnt = 0
     var mainRvLiveData = MutableLiveData(arrayListOf<MainRecyclerViewItem>())
     var imgHashMap: HashMap<Int, HashMap<String, String>> = hashMapOf()
 
 
     fun getClickImgListAll() {
+        cnt = 0
+        myRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (dataSnapshot: DataSnapshot in snapshot.children) {
+                    imgHashMap[cnt] = dataSnapshot.child("ImgList").value as HashMap<String, String>
+                    Log.d(TAG, "키 값 ${imgHashMap[cnt]?.keys}")
+                    cnt++
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.d(TAG, "데이터 가져오기 오류")
+            }
+        })
+    }
+
+    fun personalGetClickImgListAll() {
         cnt = 0
         myRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {

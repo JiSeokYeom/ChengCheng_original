@@ -27,7 +27,6 @@ class MainItemClick : AppCompatActivity() {
 
     companion object {
         var itemClickPosition = 0
-      //  var alcoholCount: ArrayList<String> = arrayListOf()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,9 +42,9 @@ class MainItemClick : AppCompatActivity() {
         Log.d(TAG, "$itemClickPosition")
 
 
-       // mainItemClickViewModel.getItemKey() 아까 주석
+        mainItemClickViewModel.getItemKey()
 
-       // alcoholCountKeyHash = FirebaseRead.imgHashMap[itemClickPosition]!!
+     //   alcoholCountKeyHash = FirebaseRead.imgHashMap[itemClickPosition]!!
        // test()
 
 
@@ -65,6 +64,8 @@ class MainItemClick : AppCompatActivity() {
                         mainItemBtnBack.visibility = View.GONE
                     } else if (position == 3) {
                         mainItemBtnNext.visibility = View.GONE
+                        mainItemBtnExit.visibility = View.VISIBLE
+
                     } else {
                         mainItemBtnBack.visibility = View.VISIBLE
                         mainItemBtnNext.visibility = View.VISIBLE
@@ -80,23 +81,13 @@ class MainItemClick : AppCompatActivity() {
                 val currentBack = mainItemViewpager.currentItem
                 mainItemViewpager.setCurrentItem(currentBack - 1, true)
             }
+
+            mainItemBtnExit.setOnClickListener {
+                finish()
+            }
         }
     }
 
-   /* private fun test() {
-        alcoholCount.clear()
-        for (key: String in alcoholCountKeyHash.keys) {
-            Log.d(TAG, "해쉬맵의 키들 ${alcoholCountKeyHash.keys}")
-            when (key) {
-                "0병" -> alcoholCount.add(alcoholCountKeyHash["0병"].toString())
-                "1병" -> alcoholCount.add(alcoholCountKeyHash["1병"].toString())
-                "2병" -> alcoholCount.add(alcoholCountKeyHash["2병"].toString())
-                "3병" -> alcoholCount.add(alcoholCountKeyHash["3병"].toString())
-                "4병" -> alcoholCount.add(alcoholCountKeyHash["4병"].toString())
-                else -> alcoholCount.add(alcoholCountKeyHash["5병이상"].toString())
-            }
-        }
-    }*/
 
     override fun onBackPressed() {
         if (binding.mainItemViewpager.currentItem == 0) {
