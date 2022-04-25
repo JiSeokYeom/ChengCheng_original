@@ -33,27 +33,6 @@ object FirebaseRead {
             }
         })
     }
-
-    fun personalGetClickImgListAll() {
-        cnt = 0
-        myRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                for (dataSnapshot: DataSnapshot in snapshot.children) {
-                    imgHashMap[cnt] = dataSnapshot.child("ImgList").value as HashMap<String, String>
-                    Log.d(TAG, "키 값 ${imgHashMap[cnt]?.keys}")
-                    cnt++
-                }
-
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Log.d(TAG, "데이터 가져오기 오류")
-            }
-        })
-    }
-
-
-
     // 메인 리사이클러뷰 파이어베이스에서 아이템 읽어와서 가져오는 함수
     fun fireBaseGetListAll(): MutableLiveData<ArrayList<MainRecyclerViewItem>> {
         myRef.addValueEventListener(object : ValueEventListener {

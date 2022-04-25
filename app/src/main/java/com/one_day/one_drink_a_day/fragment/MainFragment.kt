@@ -77,7 +77,12 @@ class MainFragment : Fragment() {
         Log.d(TAG,"리즘 됨!!!!!!!!!!!!!")
         adapterRV.notifyDataSetChanged()
         progressDialog.show(childFragmentManager,"progressDialog")
-        progressDialog.loadingProgress(1000)
+        mainViewModel.rvLiveData.observe(viewLifecycleOwner) {
+            adapterRV.setData(it)
+            //     mainViewModel.item.clear()
+            adapterRV.notifyDataSetChanged()
+        }
+        progressDialog.loadingProgress(2000)
     }
 
     override fun onPause() {

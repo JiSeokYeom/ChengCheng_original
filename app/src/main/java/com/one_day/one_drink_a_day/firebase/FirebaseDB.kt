@@ -54,6 +54,14 @@ object FirebaseDB {
             .child("TitleName")
             .setValue(SharedObject.titleString)
 
+        // 유저 날짜 추가
+        database.child("Users")
+            .child(userID)
+            .child("ItemList")
+            .child(resultKey)
+            .child("Date")
+            .setValue(SharedObject.date)
+
         publicListAdd()
 
     }
